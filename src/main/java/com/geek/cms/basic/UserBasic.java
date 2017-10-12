@@ -1,7 +1,7 @@
 package com.geek.cms.basic;
 
 /**
- * 获取当前操作用户姓名，角色，权限等的基本信息fffff4d
+ * 获取当前操作用户姓名，角色，权限等的基本信息fffff4dd
  * @author luzhengning
  * @version 2017-8-17
  */

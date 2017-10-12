@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>3种基于Bootstrap的超酷Tabs选项卡UI设计|DEMO1_jQuery之家-自由分享jQuery、html5、css3的插件库</title>
+	<link rel="stylesheet" href="../../static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<link href="../../static/Other/normalize.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../static/Plugin/jQueryLeftBlueMenu2/css/default.css">
+    <link href="../../static/Plugin/jQueryLeftBlueMenu2/css/app.css" rel="stylesheet" type="text/css">
+    <link href="../../static/main/css/home-main.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		
+		
+		
+		.menu-container{
+			padding: 0px;
+			height: calc(100% - 80px);
+		}
+		#contentLeft,#leftNavigation{
+			margin: 0px;
+		}
+	</style>
+	<!--[if IE]>
+		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+	<![endif]-->
+	<!---->
+</head>
+<body>
+<div class="col-md-12" id="header">	
+	<h1>佳世达仓储物流管理系统</h1>
+</div>
+	<div class="menu-container col-md-1">
+   
+	<div id="contentWrapper">
+
+	    <div id="contentLeft">
+
+	        <ul id="leftNavigation">
+
+	            <li class="active">
+	                <a href="#"><i class="fa fa-coffee leftNavIcon"></i>系统管理</a>
+	                <ul>
+	                    <li>
+	                        <a href="#" id="22" name="https://www.taobao.com"><i class="fa fa-angle-right leftNavIcon"></i>淘宝网</a>
+	                    </li>
+	                    <li>
+	                        <a href="static/Plugin/jQueryLeftBlueMenu2/#"><i class="fa fa-angle-right leftNavIcon"></i> Our Team</a>
+	                    </li>
+	                </ul>
+	            </li>
+	            <li>
+	                <a href="static/Plugin/jQueryLeftBlueMenu2/#"><i class="fa fa-flask leftNavIcon"></i> Products</a>
+	                <ul>
+	                    <li>
+	                        <a href="static/Plugin/jQueryLeftBlueMenu2/#"><i class="fa fa-angle-right leftNavIcon"></i> Garden</a>
+	                    </li>
+	                    <li>
+	                        <a href="static/Plugin/jQueryLeftBlueMenu2/#"><i class="fa fa-angle-right leftNavIcon"></i> Office</a>
+	                    </li>
+	                    <li>
+	                        <a href="static/Plugin/jQueryLeftBlueMenu2/#"><i class="fa fa-angle-right leftNavIcon"></i> Home</a>
+	                    </li>
+	                </ul>
+	            </li>
+	            <li>
+	                <a href="static/Plugin/jQueryLeftBlueMenu2/#"><i class="fa fa-truck leftNavIcon"></i> Services</a>
+	                <ul>
+	                    <li>
+	                        <a href="static/Plugin/jQueryLeftBlueMenu2/#"><i class="fa fa-angle-right leftNavIcon"></i> Garden</a>
+	                    </li>
+	                    <li>
+	                        <a href="static/Plugin/jQueryLeftBlueMenu2/#"><i class="fa fa-angle-right leftNavIcon"></i> Office</a>
+	                    </li>
+	                    <li>
+	                        <a href="static/Plugin/jQueryLeftBlueMenu2/#"><i class="fa fa-angle-right leftNavIcon"></i> Home</a>
+	                    </li>
+	                </ul>
+	            </li>
+	            <li class="clickable">
+	                <a href="static/Plugin/jQueryLeftBlueMenu2/#"><i class="fa fa-envelope-o leftNavIcon"></i> Contact us</a>
+	            </li>
+
+	        </ul>
+
+	    </div>
+
+
+	</div>
+   
+    </div>
+	<div class="tab col-md-11" role="tabpanel" style="calc(100% - 80px);">
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist" id="tab-header">
+			<li role="presentation" id="li11" class="active"><a href="#Section11" id="tab11" aria-controls="home" role="tab" data-toggle="tab">首页</a></li>
+		</ul>
+		<!-- Tab panes -->
+		<div class="tab-content" >
+			<div role="tabpanel" class="tab-pane active" id="Section11">
+				<iframe src="C:\Users\Administrator\Desktop\网站\template.html" width="100%" height="100%" frameborder="0"></iframe>
+			</div>
+		</div>
+	</div>
+	
+	<script src="../../static/jQuery/jquery-2.1.1.min.js" type="text/javascript"></script>
+	<script>window.jQuery || document.write('<script src="../../static/jQuery/jquery-2.1.1.min.js"><\/script>')</script>
+	<script src="../../static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<script src="../../static/menu/jQueryMenu/jquery.auroramenu.js"></script>
+	<script src="../../static/Plugin/jQueryLeftBlueMenu2/js/jquery.ssd-vertical-navigation.min.js"></script>
+	<script src="../../static/Plugin/jQueryLeftBlueMenu2/js/app.js"></script>
+	<script type="text/javascript">
+		var zindex=999;
+		//左侧菜单点击事件 
+		$("#leftNavigation li ul li a").click(function(){
+			//id
+			var id=$(this).attr("id");
+			//url
+			var url=$(this).attr("name");
+			//标题
+			var menuName=$(this).text();
+			//
+			var tabid="#tab"+id;
+			//该菜单是否已经打开
+			if(null!=$(tabid).html()){
+				//已经打开，直接显示
+				$(tabid).trigger("click");
+				return;
+			}
+			zindex=(zindex-1);
+			//新建窗口显示,添加选项卡
+			$("#tab-header").append("<li role='presentation' id='li"+id+"' style='z-index:"+zindex+"'>"
+									+"<a href='#Section"+id+"'  id='tab"+id+"' aria-controls='messages' role='tab' data-toggle='tab'>"
+										+menuName
+									+"</a><span class='glyphicon glyphicon-remove' onClick='closeForm("+id+")'></span></li>");
+			//添加页面
+			$(".tab-content").append("<div role='tabpanel' class='tab-pane' id='Section"+id+"'>"
+										+"<iframe src='"+url+"' width='100%' height='100%' frameborder='0'></iframe>"
+									+"</div>");
+			$(tabid).trigger("click");
+		});
+		function closeForm(obj){
+		    var isActive=null;
+			//判断窗体是否激活
+			if($("#li"+obj).attr("class")=='active'){
+				isActive='active';
+			}
+			//获取当前窗体的上一个窗体和下一个窗体
+			var prev=$("#li"+obj).prev();
+			var next=$("#li"+obj).next();
+			//关闭当前窗口
+			$("#li"+obj).remove();
+			$("#Section"+obj).remove();
+			//当前的窗体是否激活
+			if(isActive!=null){
+				if(null!=next.html()){
+					$(next).find("a").trigger("click");
+					//显示上一个窗口
+					$("#tab"+obj).trigger("click");
+				}else{
+					//显示下一个窗口
+					$(prev).find("a").trigger("click");
+				}
+			}
+		}
+	</script>
+</body>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</html>

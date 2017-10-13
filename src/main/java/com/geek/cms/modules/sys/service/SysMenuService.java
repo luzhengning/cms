@@ -13,9 +13,9 @@ import com.geek.cms.plugin.entity.splitGridReq.GridRequestModel;
 import com.geek.cms.utils.db.DbUtil;
 
 /**
- * 后台左侧菜单   这是测试啊测试啊测试啊XXXXXXXXXXXXXX
+ * 后台左侧菜单
  * @author 路正宁
- *
+ * @time:2017年10月13日 下午4:28:47
  */
 public class SysMenuService extends CrudService<SysMenu> implements SysMenuDao {
 

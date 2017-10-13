@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -123,6 +124,7 @@ public class SysMenuController {
 		return data;
 	}
 	@PostConstruct  
+	@PostMapping
     public void  init(){  
         System.out.println("################servlet初始化");  
     }  

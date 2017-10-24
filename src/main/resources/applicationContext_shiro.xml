@@ -34,6 +34,8 @@
 				<value>
 					 /static/**=anon
 					 /user/toLoginJsp=anon
+					 <!-- 开放接口，例如验证码 -->
+					 /open/**=anon
 					 /user/login=anon
 					 /**=authc  
 				</value>

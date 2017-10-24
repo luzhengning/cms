@@ -3,8 +3,11 @@
     xmlns="http://java.sun.com/xml/ns/javaee"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
     id="WebApp_ID" version="3.0">
+    <!-- web应用名称 -->
   <display-name>Archetype Created Web Application</display-name>
-  
+  <!-- 声明WEB应用的描述信息   -->
+  <description></description> 
+  <!-- web.xml 的加载顺序是：context-param -> listener -> filter -> servlet  -->
   <filter>  
        <filter-name>SpringEncodingFilter</filter-name>  
        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
@@ -47,6 +50,9 @@
 	 <listener>
          <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
      </listener>
+	  <listener>
+	    <listener-class>com.geek.cms.modules.listener.WebContextListener</listener-class>
+	  </listener>
     
   <servlet>
   	<servlet-name>springmvc</servlet-name>

@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
@@ -32,13 +33,14 @@ import com.geek.cms.modules.sys.service.UserService;
 @RequestMapping("/user")
 public class UserController {
 	private UserService userService=new UserService();
+	//跳转至登录页面
 	@RequestMapping("/toLoginJsp")
 	public ModelAndView ToLoginJsp() {
 		return new ModelAndView("/Admin/login");
 	}
 	
 	@RequestMapping("/login")
-	public ModelAndView login(@ModelAttribute("user") User user,HttpSession session) throws UnsupportedEncodingException {
+	public ModelAndView login(@ModelAttribute("user") User user,HttpSession session,HttpServletRequest request) throws UnsupportedEncodingException {
 		// TODO 登录测试
 		user.setAccount("asd");
 		user.setPassword("asdf");
@@ -50,11 +52,13 @@ public class UserController {
 		user.setAccount(new String(user.getAccount().getBytes("ISO-8859-1"),"UTF-8"));
 		String username = user.getAccount();
         String password = user.getPassword();
-        
+        //用户输入的验证码
+        String userValidationCode = request.getParameter("validationCode");
+        //系统验证码
+        String sysValidationCode = (String)session.getAttribute("validation_code");
         // TODO 测试用户名和密码
         username="15002653994";
         password="1235";
-
        
         
         //List<currentUser> users = userService.getAllUsers();
@@ -93,6 +97,19 @@ public class UserController {
         //user = userService.(username);
         //subject.getSession().setAttribute("user", user);
         //return new ModelAndView("success");
-        return new ModelAndView( "redirect:/a/index",model);
+        return new ModelAndView( "redirect:/admin/administrators",model);
+	}
+	int ticket=2;  
+	@RequestMapping("/test")
+	public void test() {
+		//简单的解决办法
+				synchronized(this){
+					if(ticket>0){
+						System.out.println("你买到票");
+						ticket--;
+					}else{
+						System.out.println("你咩有买到票");
+					}
+				}
 	}
 }

@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.geek.cms.common.dbbase.CrudService;
 import com.geek.cms.dao.DbBasicDao;
-import com.geek.cms.modules.sys.dao.SysMenuDao;
+import com.geek.cms.modules.faramwer.factoryMethod.product.service.ServiceProduct;
+import com.geek.cms.modules.sys.dao.SysMenuProduct;
+import com.geek.cms.modules.sys.entity.Permission;
 import com.geek.cms.modules.sys.entity.SysMenu;
 import com.geek.cms.plugin.entity.splitGridReq.GridRequestModel;
 import com.geek.cms.utils.db.DbUtil;
@@ -17,14 +19,11 @@ import com.geek.cms.utils.db.DbUtil;
  * @author 路正宁
  * @time:2017年10月13日 下午4:28:47
  */
-public class SysMenuService extends CrudService<SysMenu> implements SysMenuDao {
+public class SysMenuService extends SysMenuProduct<SysMenu> {
 
 	//父级id
 	private String ParentId="";
-	/**
-	 * depth 查询的深度，小于0继续查询
-	 * @param depth
-	 */
+
 	public SysMenuService() {
 		super(SysMenu.class);
 	}
@@ -38,6 +37,7 @@ public class SysMenuService extends CrudService<SysMenu> implements SysMenuDao {
 	 */
 	public List<SysMenu> findListByRoleId(Object roleId,Object parentId,int depthNum,HttpServletRequest request) {
 		String sql="SELECT * FROM sys_tree_menu WHERE parent_id=? ORDER BY sort_num DESC";
+		//sql中的查询参数
 		Object[] params=null;
 		if(parentId!=null){
 			params=new Object[]{parentId};
@@ -150,16 +150,7 @@ public class SysMenuService extends CrudService<SysMenu> implements SysMenuDao {
 		// TODO 自动生成的方法存根
 		return 0;
 	}
-	@Override
-	public List<SysMenu> findList(GridRequestModel model) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-	@Override
-	public List<SysMenu> findBySql(String sql, Object[] params) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
+
 	public boolean setIndex(String id){
 		String sql="UPDATE sys_tree_menu SET index_select=? WHERE id=?";
 		return super.update(sql, new Object[]{"1",id});
@@ -196,4 +187,11 @@ public class SysMenuService extends CrudService<SysMenu> implements SysMenuDao {
 	private String getParentId(HttpServletRequest request){
 		return request.getSession().getAttribute("ParentId").toString();
 	}
+
+	@Override
+	public List<SysMenu> findList(GridRequestModel model) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
 }

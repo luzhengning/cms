@@ -5,13 +5,14 @@ import java.util.List;
 
 import com.geek.cms.common.dbbase.CrudService;
 import com.geek.cms.dao.DbBasicDao;
-import com.geek.cms.modules.sys.dao.UserDao;
+import com.geek.cms.modules.faramwer.factoryMethod.product.service.ServiceProduct;
+import com.geek.cms.modules.sys.dao.UserProduct;
 import com.geek.cms.modules.sys.entity.User;
 import com.geek.cms.plugin.entity.splitGridReq.GridRequestModel;
 import com.geek.cms.plugin.util.SplitGridRequestUtil;
 import com.geek.cms.utils.db.DbUtil;
 
-public class UserService extends CrudService<User> implements UserDao {
+public class UserService extends UserProduct<User> {
 
 	public UserService() {
 		super(User.class);
@@ -81,7 +82,7 @@ public class UserService extends CrudService<User> implements UserDao {
 
 	public User load(String id) {
 		String sql=querySql+" WHERE id=?";
-		return this.load(sql, new Object[]{id});
+		return super.load(sql, new Object[]{id});
 	}
 	/**
 	 * 登录
@@ -111,18 +112,19 @@ public class UserService extends CrudService<User> implements UserDao {
 		return 0;
 	}
 
-	@Override
 	public List<User> findList(GridRequestModel model) {
 		String sql=querySql+" where 1=1 ";
 		sql=(sql+model.getParamsNameSql());
 		return super.find(sql,model.getParams());
 	}
 
-	@Override
 	public List<User> findBySql(String sql, Object[] params) {
 		sql=querySql+" where "+sql;
 		return super.find(sql, params);
 	}
+
+
+
 
 
 

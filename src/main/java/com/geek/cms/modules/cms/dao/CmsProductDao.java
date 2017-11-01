@@ -1,6 +1,6 @@
 package com.geek.cms.modules.cms.dao;
 
-import com.geek.cms.modules.faramwer.dpatterns.factoryMethod.ServiceProduct;
+import com.geek.cms.modules.faramwer.factoryMethod.product.service.ServiceProduct;
 
 public interface CmsProductDao{
 	public void insert();

@@ -4,35 +4,42 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.geek.cms.common.dbbase.CrudService;
-import com.geek.cms.modules.sys.dao.RoleDao;
+import com.geek.cms.modules.faramwer.factoryMethod.product.service.ServiceProduct;
+import com.geek.cms.modules.sys.dao.RoleProduct;
 import com.geek.cms.modules.sys.entity.Role;
+import com.geek.cms.modules.sys.entity.User;
 import com.geek.cms.plugin.entity.splitGridReq.GridRequestModel;
 
-public class RoleService  extends CrudService<Role> implements RoleDao {
+public class RoleService extends RoleProduct<Role> {
 
 	public RoleService() {
 		super(Role.class);
 	}
 
+	@Override
 	public boolean add(Role t) {
-		String sql="";
+		// TODO 自动生成的方法存根
 		return false;
 	}
 
+	@Override
 	public boolean delete(String id) throws SQLException {
 		// TODO 自动生成的方法存根
 		return false;
 	}
 
+	@Override
 	public boolean update(Role t) {
 		// TODO 自动生成的方法存根
 		return false;
 	}
 
+	@Override
 	public Role load(String id) {
 		// TODO 自动生成的方法存根
 		return null;
 	}
+
 	@Override
 	public List<Role> findList(GridRequestModel model) {
 		// TODO 自动生成的方法存根
@@ -40,8 +47,25 @@ public class RoleService  extends CrudService<Role> implements RoleDao {
 	}
 
 	@Override
-	public List<Role> findBySql(String sql, Object[] params) {
+	public List<Role> findList(String sql, Object[] params) {
 		// TODO 自动生成的方法存根
 		return null;
 	}
+
+	@Override
+	public int maximum(GridRequestModel model) {
+		// TODO 自动生成的方法存根
+		return 0;
+	}
+
+	@Override
+	public int maximum(String sql, Object[] params) {
+		// TODO 自动生成的方法存根
+		return 0;
+	}
+
+
+
+
+
 }

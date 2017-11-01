@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.geek.cms.common.uiPlugin.syszTree.BsTreeUtil;
+import com.geek.cms.modules.sys.dao.SysMenuProduct;
 import com.geek.cms.modules.sys.entity.SysMenu;
 import com.geek.cms.modules.sys.service.SysMenuService;
 import com.geek.cms.utils.JsonUtil;
@@ -123,13 +122,10 @@ public class SysMenuController {
 		data.put("depthNum", depthNum);
 		return data;
 	}
-	@PostConstruct  
-	@PostMapping
     public void  init(){  
         System.out.println("################servlet初始化");  
     }  
       
-    @PreDestroy  
     public void  dostory(){  
         System.out.println("################servlet销毁");  
     }  

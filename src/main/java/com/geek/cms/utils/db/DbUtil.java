@@ -18,7 +18,7 @@ import com.geek.cms.plugin.entity.splitGridReq.GridRequestModel;
  *
  * @param <T>
  */
-public abstract class DbUtil<T> implements DbUtilDao<T> {
+public abstract class DbUtil<T> /*implements DbUtilDao<T>*/ {
 	
 	private QueryRunner runner=new QueryRunner(DbSource.getDataSource());
 	private Class clz;
@@ -101,9 +101,6 @@ public abstract class DbUtil<T> implements DbUtilDao<T> {
 		return 0;
 	}
 
-	public abstract List<T> findList(GridRequestModel model);
-	
-	public abstract List<T> findBySql(String sql,Object[] params);
 
 	/**
 	 * 开始执行

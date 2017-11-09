@@ -1,8 +1,9 @@
 /*
-SQLyog Ultimate v12.08 (64 bit)
+SQLyog Ultimate v12.09 (64 bit)
 MySQL - 5.7.17-log : Database - ccmmss
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -202,6 +203,36 @@ CREATE TABLE `sys_tree_menu` (
 /*Data for the table `sys_tree_menu` */
 
 insert  into `sys_tree_menu`(`id`,`name`,`parent_id`,`url`,`sort_num`,`create_time`,`update_time`,`role_id`,`index_select`,`create_by`,`is_enable`) values (1,'统计报表',0,'',1235,NULL,NULL,'2,3,5,13,16','',NULL,'1'),(2,'店铺管理',0,'',1,NULL,NULL,'1,2,3','',NULL,'1'),(3,'商品管理',0,'',NULL,NULL,NULL,'2,3','',NULL,'1'),(4,'订单管理',0,'',1,NULL,NULL,'2,3','',NULL,'1'),(5,'用户管理',0,'',NULL,NULL,NULL,'2,3','',NULL,'1'),(6,'前端管理',0,'',NULL,NULL,NULL,'2,3','',NULL,'1'),(7,'系统管理',0,'',1200,NULL,NULL,'3','',NULL,'1'),(8,'安全管理',0,'',0,NULL,NULL,'2,3','',NULL,'1'),(9,'数据统计',0,'',1,NULL,NULL,'2,3','',NULL,'1'),(11,'商品查询',3,'',NULL,NULL,NULL,'3','',NULL,'1'),(12,'订单查询',4,'',NULL,NULL,NULL,'3','',NULL,'1'),(14,'系统菜单',7,'/sysMenu/menuLoad',1200,NULL,NULL,'3','',NULL,'1'),(15,'用户列表',8,'',NULL,NULL,NULL,'3','',NULL,'1'),(16,'角色列表',8,'',NULL,NULL,NULL,'3','',NULL,'1'),(17,'权限列表',8,'',1,NULL,NULL,'3','',NULL,'1'),(18,'操作轨迹',9,'',2,NULL,NULL,'3','',NULL,'1'),(19,'用户查询',5,'/user/index',1,NULL,NULL,'3','',NULL,'1'),(20,'首页',1,'/a/testPage',1234,NULL,NULL,'1,2,3,5','1',NULL,'1'),(24,'店铺资料',2,'www/taobao/com',120,NULL,NULL,'1,3','',NULL,'1'),(47,'奇热网若群二无',10,'2134',1234,NULL,NULL,'2','',NULL,'1'),(48,'奇热网若群二无',10,'2134',1234,NULL,NULL,'2,5','',NULL,'1'),(51,'顶级菜单',0,'',0,NULL,NULL,'3','',NULL,'1'),(52,'1',51,'2',3,NULL,NULL,'3','',NULL,'1'),(53,'1',52,'2',0,NULL,NULL,'3','',NULL,'1'),(72,'角色管理',7,'/role/index',1,'2017-06-05 18:19:03',NULL,'3','',NULL,'1'),(74,'测试',0,'',9999,'2017-06-11 18:09:43',NULL,'1,2,3','',NULL,'1'),(75,'角色表单',74,'/role/form',1,'2017-06-11 18:10:48',NULL,'1,2,3','',NULL,'1'),(76,'权限管理',7,'/permission/index',0,'2017-06-20 11:09:12',NULL,'3','',NULL,'1'),(77,'管理员',7,'/user/index?user=admin',1,'2017-06-22 09:51:18',NULL,'3','select',NULL,'1'),(78,'爱的色放',52,NULL,1,NULL,NULL,'3',NULL,NULL,'1'),(79,'阿斯蒂芬',78,'sysmenu/load',22,'2017-08-17 11:48:05',NULL,'2',NULL,NULL,'1'),(80,'as多发点是',12,NULL,12,NULL,NULL,'2',NULL,NULL,'1'),(81,'1324',78,'adsf',2134,NULL,NULL,NULL,NULL,NULL,'1'),(82,'1234',78,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1'),(83,'114321234',78,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1');
+
+/*Table structure for table `sys_user` */
+
+DROP TABLE IF EXISTS `sys_user`;
+
+CREATE TABLE `sys_user` (
+  `id` int(11) DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL,
+  `nickname` varchar(150) COLLATE utf8_bin DEFAULT NULL,
+  `name` varchar(150) COLLATE utf8_bin DEFAULT NULL,
+  `account` varchar(150) COLLATE utf8_bin DEFAULT NULL,
+  `password` varchar(300) COLLATE utf8_bin DEFAULT NULL,
+  `sex` varchar(6) COLLATE utf8_bin DEFAULT NULL,
+  `age` int(3) DEFAULT NULL,
+  `birthday` datetime DEFAULT NULL,
+  `phone` varchar(33) COLLATE utf8_bin DEFAULT NULL,
+  `email` varchar(90) COLLATE utf8_bin DEFAULT NULL,
+  `address` varchar(300) COLLATE utf8_bin DEFAULT NULL,
+  `security_level` int(5) DEFAULT NULL,
+  `account_level` int(5) DEFAULT NULL,
+  `sort` int(10) DEFAULT NULL,
+  `registration_time` datetime DEFAULT NULL,
+  `mark` varchar(765) COLLATE utf8_bin DEFAULT NULL,
+  `user_type` varchar(72) COLLATE utf8_bin DEFAULT NULL,
+  `is_enable` varchar(3) COLLATE utf8_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+/*Data for the table `sys_user` */
+
+insert  into `sys_user`(`id`,`role_id`,`nickname`,`name`,`account`,`password`,`sex`,`age`,`birthday`,`phone`,`email`,`address`,`security_level`,`account_level`,`sort`,`registration_time`,`mark`,`user_type`,`is_enable`) values (1,2,'小甜甜','路正宁','15209426503','02e2a70eeb03d5d5d5c8918d26771074','男',21,'1996-05-26 16:53:49','15002653994','1738515000@qq.com','甘肃省兰州市',5,5,1,'2017-05-16 16:54:36','','admin',NULL),(2,3,'小暴龙','马云','15002653994','b55e899b71d4bb08fa77190a11ac26b8','男',30,'2012-02-28 09:48:46','18215199576','15002653994@163qq.com','浙江杭州',6,7,1,'2017-05-19 09:50:13','1235','admin',NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

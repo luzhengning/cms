@@ -15,6 +15,4 @@ public interface ServiceProductDao<T>  {
 	public List<T> findList(String sql,Object[] params);
 	public int maximum(GridRequestModel model);
 	public int maximum(String sql,Object[] params);
-	
-	
 }

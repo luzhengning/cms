@@ -32,36 +32,25 @@
 			<property name="unauthorizedUrl" value="/user/toLoginJsp" />
 			<property name="filterChainDefinitions">
 				<value>
-					 /static/**=anon
+					 <!-- /static/**=anon
 					 /user/toLoginJsp=anon
-					 <!-- 开放接口，例如验证码 -->
+					 开放接口，例如验证码
 					 /open/**=anon
 					 /user/login=anon
-					 /**=authc  
+					 /**=authc   -->
 				</value>
 			</property>
 		</bean>
-	<!-- 配置 Bean 后置处理器: 会自动的调用和 Spring 整合后各个组件的生命周期方法. -->  
-    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
-	
-	<!-- 开启Shiro注解的Spring配置方式的beans。在lifecycleBeanPostProcessor之后运行 -->
-	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
-		depends-on="lifecycleBeanPostProcessor" />
-	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-		<property name="securityManager" ref="securityManager" />
-	</bean>
-	
 
-	
 	<!-- Shiro在注解模式下，登录失败，与没有权限均是通过抛出异常。并且默认并没有去处理或者捕获这些异常。在springMVC下需要配置捕获相应异常来通知用户信息，如果不配置异常会抛出到页面 -->
-	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+	 <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
 				<prop key="org.apache.shiro.authz.UnauthorizedException">
-					/unauthorized
+					/user/toLoginJsp
 				</prop>
 				<prop key="org.apache.shiro.authz.UnauthenticatedException">
-					/unauthenticated
+					/user/toLoginJsp
 				</prop>
 			</props>
 		</property>

@@ -13,6 +13,9 @@ import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresGuest;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.context.ApplicationContext;
@@ -100,6 +103,7 @@ public class UserController {
         return new ModelAndView( "redirect:/admin/administrators",model);
 	}
 	int ticket=2;  
+	@RequiresGuest
 	@RequestMapping("/test")
 	public void test() {
 		//简单的解决办法

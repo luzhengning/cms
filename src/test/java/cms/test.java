@@ -10,7 +10,7 @@ import com.geek.cms.modules.faramwer.factoryMethod.product.service.ServiceProduc
 public class test {
 
 	public static void main(String[] args) {
-		ServiceProduct product=new CmsFactory().create(null);
-		product.asdfad();
+		ServiceProduct product=new CmsFactory().create("asd");
+		//product.add(null);
 	}
 }

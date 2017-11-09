@@ -8,7 +8,8 @@ public class CmsFactory extends ServiceFactory {
 	public final static String CMS="CMS";
 	public final static String CMSS="CMMS";
 
-	public ServiceProduct create(String type) {
+	@SuppressWarnings("finally")
+	public ServiceProduct<?> create(String type) {
 		try {
 			switch(type) {
 			case CMS:
@@ -17,11 +18,10 @@ public class CmsFactory extends ServiceFactory {
 				return null;
 			}
 			throw new Exception("工厂未生产:"+type);
-		} catch (Exception e) {
+		} catch (Exception e){
 			e.printStackTrace();
 		}finally {
 			return null;
 		}
 	}
-
 }

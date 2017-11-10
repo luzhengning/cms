@@ -2,6 +2,7 @@ package com.geek.cms.modules.sys.web;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,18 +14,18 @@ import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresGuest;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.geek.cms.modules.sys.dao.RoleDao;
+import com.geek.cms.modules.sys.entity.Role;
 import com.geek.cms.modules.sys.entity.User;
+import com.geek.cms.modules.sys.service.RoleService;
 import com.geek.cms.modules.sys.service.UserService;
 
 /**
@@ -106,14 +107,18 @@ public class UserController {
 	@RequiresGuest
 	@RequestMapping("/test")
 	public void test() {
+		RoleDao dao=new RoleService();
+		int count=dao.maximum(new String[] {"id","id"}, new Object[] {"1","3"},"AND");
+		List<Role> list=dao.findList(new String[] {"id","id"}, new Object[] {"1","3"},"AND");
+		Role role=dao.load("3");
 		//简单的解决办法
-				synchronized(this){
-					if(ticket>0){
-						System.out.println("你买到票");
-						ticket--;
-					}else{
-						System.out.println("你咩有买到票");
-					}
-				}
+		synchronized(this){
+			if(ticket>0){
+				System.out.println("你买到票");
+				ticket--;
+			}else{
+				System.out.println("你咩有买到票");
+			}
+		}
 	}
 }

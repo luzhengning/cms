@@ -6,13 +6,13 @@ import java.util.List;
 import com.geek.cms.common.dbbase.CrudService;
 import com.geek.cms.dao.DbBasicDao;
 import com.geek.cms.modules.faramwer.factoryMethod.product.service.ServiceProduct;
-import com.geek.cms.modules.sys.dao.UserProduct;
+import com.geek.cms.modules.sys.dao.UserDao;
 import com.geek.cms.modules.sys.entity.User;
-import com.geek.cms.plugin.entity.splitGridReq.GridRequestModel;
-import com.geek.cms.plugin.util.SplitGridRequestUtil;
+import com.geek.cms.plugin.grid.SplitGridRequestUtil;
+import com.geek.cms.plugin.grid.splitGridReq.GridRequestModel;
 import com.geek.cms.utils.db.DbUtil;
 
-public class UserService extends UserProduct<User> {
+public class UserService extends UserDao {
 
 	public UserService() {
 		super(User.class);

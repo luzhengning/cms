@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.geek.cms.modules.sys.entity.User;
-import com.geek.cms.plugin.entity.splitGridReq.GridRequestModel;
+import com.geek.cms.plugin.grid.splitGridReq.GridRequestModel;
 import com.geek.cms.utils.db.DbUtil;
 
 public abstract interface CrudDao<T> {

@@ -3,7 +3,7 @@ package com.geek.cms.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.geek.cms.plugin.entity.splitGridReq.GridRequestModel;
+import com.geek.cms.plugin.grid.splitGridReq.GridRequestModel;
 
 /**
  * 数据库工具类接口

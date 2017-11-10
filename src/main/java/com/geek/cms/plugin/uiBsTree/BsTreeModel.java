@@ -1,4 +1,4 @@
-package com.geek.cms.common.uiPlugin.syszTree;
+package com.geek.cms.plugin.uiBsTree;
 
 import java.util.List;
 

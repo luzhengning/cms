@@ -1,10 +1,10 @@
-package com.geek.cms.plugin.util;
+package com.geek.cms.plugin.grid;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.geek.cms.dao.DbBasicDao;
-import com.geek.cms.plugin.entity.splitGridReq.GridRequestModel;
-import com.geek.cms.plugin.entity.splitPage.SplitPage;
+import com.geek.cms.plugin.grid.splitGridReq.GridRequestModel;
+import com.geek.cms.plugin.grid.splitPage.SplitPage;
 
 
 

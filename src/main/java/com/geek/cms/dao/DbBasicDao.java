@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import com.geek.cms.plugin.entity.splitGridReq.GridRequestModel;
+import com.geek.cms.plugin.grid.splitGridReq.GridRequestModel;
 /**
  * 数据访问接口
  * @author 路正宁

@@ -9,7 +9,7 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.geek.cms.dao.DbUtilDao;
-import com.geek.cms.plugin.entity.splitGridReq.GridRequestModel;
+import com.geek.cms.plugin.grid.splitGridReq.GridRequestModel;
 
 
 /**
@@ -19,6 +19,8 @@ import com.geek.cms.plugin.entity.splitGridReq.GridRequestModel;
  * @param <T>
  */
 public abstract class DbUtil<T> /*implements DbUtilDao<T>*/ {
+	
+	public static boolean isLog=true;
 	
 	private QueryRunner runner=new QueryRunner(DbSource.getDataSource());
 	private Class clz;
@@ -30,7 +32,8 @@ public abstract class DbUtil<T> /*implements DbUtilDao<T>*/ {
 	/**
 	 * 插入
 	 */
-	public boolean add(String sql,Object params[]) {
+	protected boolean add(String sql,Object params[]) {
+		if(isLog)System.out.println(sql);
 		try {
 			int result=runner.update(sql, params);
 			if(result>=1)return true;
@@ -42,7 +45,8 @@ public abstract class DbUtil<T> /*implements DbUtilDao<T>*/ {
 		return false;
 	}
 
-	public boolean delete(String sql,Object params[]) throws SQLException {
+	protected boolean delete(String sql,Object params[]) throws SQLException {
+		if(isLog)System.out.println(sql);
 		try {
 			if(runner.update(sql, params)>=1)return true;
 		} catch (SQLException e) {
@@ -54,7 +58,8 @@ public abstract class DbUtil<T> /*implements DbUtilDao<T>*/ {
 		return false;
 	}
 
-	public boolean update(String sql,Object params[]) {
+	protected boolean update(String sql,Object params[]) {
+		if(isLog)System.out.println(sql);
 		try {
 			if(runner.update(sql, params)>=1)return true;
 		} catch (SQLException e) {
@@ -66,7 +71,8 @@ public abstract class DbUtil<T> /*implements DbUtilDao<T>*/ {
 		return false;
 	}
 
-	public T load(String sql,Object params[]) {
+	protected T load(String sql,Object params[]) {
+		if(isLog)System.out.println(sql);
 		try {
 			return (T)(runner.query(sql,new BeanHandler(clz),params));
 		} catch (SQLException e) {
@@ -77,7 +83,8 @@ public abstract class DbUtil<T> /*implements DbUtilDao<T>*/ {
 		}
 		return null;
 	}
-	public List<T> find(String sql,Object params[]){
+	protected List<T> find(String sql,Object params[]){
+		if(isLog)System.out.println(sql);
 		try {
 			return runner.query(sql, new BeanListHandler(clz), params);
 		} catch (SQLException e) {
@@ -88,7 +95,8 @@ public abstract class DbUtil<T> /*implements DbUtilDao<T>*/ {
 		}
 		return null;
 	}
-	public int getNum(String sql,Object[] params){
+	protected int getNum(String sql,Object[] params){
+		if(isLog)System.out.println(sql);
 		try {
 			int count = ((Long)runner.query(sql, params,new ScalarHandler(1))).intValue();
 			return count;
@@ -107,7 +115,7 @@ public abstract class DbUtil<T> /*implements DbUtilDao<T>*/ {
 	 * @param callBack
 	 * @return
 	 */
-	private Object execute(CallBack callBack) {
+	protected Object execute(CallBack callBack) {
 		try {
 			// 开启事务
 			DbSource.startTransaction();
@@ -125,7 +133,7 @@ public abstract class DbUtil<T> /*implements DbUtilDao<T>*/ {
 	/**
 	 * 查询
 	 */
-	public Object executeTransaction(final String sql) {
+	protected Object executeTransaction(final String sql) {
 
 		Object obj = execute(new CallBack() {
 			public Object toTemplate() {

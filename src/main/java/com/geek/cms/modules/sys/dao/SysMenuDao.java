@@ -2,6 +2,7 @@ package com.geek.cms.modules.sys.dao;
 
 import com.geek.cms.modules.faramwer.factoryMethod.product.service.ServiceProduct;
 import com.geek.cms.modules.faramwer.factoryMethod.product.service.ServiceProductDao;
+import com.geek.cms.modules.sys.entity.SysMenu;
 import com.geek.cms.modules.sys.entity.User;
 import com.geek.cms.utils.db.DbUtil;
 
@@ -10,8 +11,8 @@ import com.geek.cms.utils.db.DbUtil;
  * @author luzhengning
  * 2017年11月1日 下午2:07:25
  */
-public abstract class SysMenuProduct<T> extends ServiceProduct<T> {
-	public SysMenuProduct(Class clz) {
+public abstract class SysMenuDao extends ServiceProduct<SysMenu> {
+	public SysMenuDao(Class clz) {
 		super(clz);
 	}
 

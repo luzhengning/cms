@@ -14,7 +14,7 @@ public class Role {
 	private String permission_id;
 	private String create_time;
 	private String update_time;
-	private String create_by;
+	private String last_user;
 	private String is_enable;
 	
 	public Role(String id){
@@ -73,11 +73,12 @@ public class Role {
 		this.update_time = update_time;
 	}
 
-	public String getCreate_by() {
-		return create_by;
+	
+	public String getLast_user() {
+		return last_user;
 	}
-	public void setCreate_by(String create_by) {
-		this.create_by = create_by;
+	public void setLast_user(String last_user) {
+		this.last_user = last_user;
 	}
 	public String getIs_enable() {
 		return is_enable;

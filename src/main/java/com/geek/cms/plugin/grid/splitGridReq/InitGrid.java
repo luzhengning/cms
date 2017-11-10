@@ -1,10 +1,10 @@
-package com.geek.cms.plugin.entity.splitGridReq;
+package com.geek.cms.plugin.grid.splitGridReq;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.geek.cms.plugin.entity.splitPage.SplitPage;
+import com.geek.cms.plugin.grid.splitPage.SplitPage;
 import com.geek.cms.utils.JsonUtil;
 import com.sdicons.json.mapper.MapperException;
 

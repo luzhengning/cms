@@ -1,6 +1,6 @@
-package com.geek.cms.plugin.entity.splitGridReq;
+package com.geek.cms.plugin.grid.splitGridReq;
 
-import com.geek.cms.plugin.entity.splitPage.SplitPage;
+import com.geek.cms.plugin.grid.splitPage.SplitPage;
 
 /**
  * 表格请求的数据

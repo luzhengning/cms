@@ -1,4 +1,4 @@
-package com.geek.cms.plugin.entity.splitGridReq;
+package com.geek.cms.plugin.grid.splitGridReq;
 
 public class GridFormModel {
 	private String title;

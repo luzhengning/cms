@@ -1,4 +1,4 @@
-package com.geek.cms.common.uiPlugin.syszTree;
+package com.geek.cms.plugin.uiBsTree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,17 @@ import java.util.List;
 import com.geek.cms.modules.sys.entity.SysMenu;
 
 
-
+/**
+ * Bootstrap树形菜单工具类
+ * @author luzhengning
+ * 2017年11月10日 下午1:36:10
+ */
 public class BsTreeUtil {
+	/**
+	 * 数据菜单对象转Bootstrap树形菜单对象
+	 * @param list
+	 * @return
+	 */
 	public List<BsTreeModel> SysMenuToBTreeJson(List<SysMenu> list){
 		List<BsTreeModel> parentList=new ArrayList<BsTreeModel>();
 		if(list==null)return null;
@@ -24,7 +33,11 @@ public class BsTreeUtil {
 		}
 		return parentList;
 	}
-	
+	/**
+	 * 设置BS树形菜单节点内容和左侧按钮组
+	 * @param sysMenu
+	 * @return
+	 */
 	private String SysMenuToJsonTextParent(SysMenu sysMenu){
 		String text="<span>"+sysMenu.getName()+"</span><span>&nbsp;&nbsp;&nbsp;&nbsp;"+sysMenu.getUrl()+" "+("select".equals(sysMenu.getIndex_select())?"[首页]":"")+"</span>"
 		+ "<span  style=\"float:right;text-decoration:none;\">"
@@ -40,6 +53,12 @@ public class BsTreeUtil {
 		 +"</span>";
 		return text;
 	}
+	/**
+	 * 通过指定的字符将字符串连接起来
+	 * @param values
+	 * @param s
+	 * @return
+	 */
 	private String arrayToString(String values,String s){
 		if(values==null)return "";
 		String[] array=values.split(",");

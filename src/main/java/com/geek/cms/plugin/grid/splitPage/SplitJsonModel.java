@@ -1,4 +1,4 @@
-package com.geek.cms.plugin.entity.splitPage;
+package com.geek.cms.plugin.grid.splitPage;
 
 import java.util.List;
 

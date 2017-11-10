@@ -12,7 +12,7 @@ public class Permission {
 	private String permission_mark;
 	private String create_time;
 	private String update_time;
-	private String last_time;
+	private String last_user;
 	private String is_enable;
 	
 	public Permission(){}
@@ -55,11 +55,12 @@ public class Permission {
 	public void setUpdate_time(String update_time) {
 		this.update_time = update_time;
 	}
-	public String getLast_time() {
-		return last_time;
+	
+	public String getLast_user() {
+		return last_user;
 	}
-	public void setLast_time(String last_time) {
-		this.last_time = last_time;
+	public void setLast_user(String last_user) {
+		this.last_user = last_user;
 	}
 	public String getIs_enable() {
 		return is_enable;

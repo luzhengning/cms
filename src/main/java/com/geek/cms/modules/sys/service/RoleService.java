@@ -5,64 +5,49 @@ import java.util.List;
 
 import com.geek.cms.common.dbbase.CrudService;
 import com.geek.cms.modules.faramwer.factoryMethod.product.service.ServiceProduct;
-import com.geek.cms.modules.sys.dao.RoleProduct;
+import com.geek.cms.modules.sys.dao.RoleDao;
 import com.geek.cms.modules.sys.entity.Role;
 import com.geek.cms.modules.sys.entity.User;
-import com.geek.cms.plugin.entity.splitGridReq.GridRequestModel;
+import com.geek.cms.plugin.grid.SplitGridRequestUtil;
+import com.geek.cms.plugin.grid.splitGridReq.GridRequestModel;
 
-public class RoleService extends RoleProduct<Role> {
+public class RoleService extends RoleDao {
 
+	
+	
 	public RoleService() {
 		super(Role.class);
 	}
 
 	@Override
 	public boolean add(Role t) {
-		// TODO 自动生成的方法存根
-		return false;
+		Object[] params=new Object[] {
+				t.getRole_name(),
+				t.getRole_mark(),
+				t.getPermission_id(),
+				t.getCreate_time(),
+				t.getUpdate_time(),
+				t.getLast_user(),
+				t.getIs_enable()
+		};
+		return super.add(insertSql, params);
 	}
-
-	@Override
-	public boolean delete(String id) throws SQLException {
-		// TODO 自动生成的方法存根
-		return false;
-	}
-
 	@Override
 	public boolean update(Role t) {
-		// TODO 自动生成的方法存根
-		return false;
+		Object[] params=new Object[] {
+				t.getRole_name(),
+				t.getRole_mark(),
+				t.getPermission_id(),
+				t.getCreate_time(),
+				t.getUpdate_time(),
+				t.getLast_user(),
+				t.getIs_enable(),
+				t.getId()
+		};
+		return super.update(updateSql, params);
 	}
 
-	@Override
-	public Role load(String id) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
-	@Override
-	public List<Role> findList(GridRequestModel model) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
-	@Override
-	public List<Role> findList(String sql, Object[] params) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
-	@Override
-	public int maximum(GridRequestModel model) {
-		// TODO 自动生成的方法存根
-		return 0;
-	}
-
-	@Override
-	public int maximum(String sql, Object[] params) {
-		// TODO 自动生成的方法存根
-		return 0;
-	}
+	
 
 
 

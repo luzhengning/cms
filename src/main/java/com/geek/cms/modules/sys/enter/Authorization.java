@@ -56,7 +56,7 @@ public class Authorization extends AuthorizingRealm {
 		//查找用户
 		List<User> userList= userService.findBySql("account=?",new Object[]{account});
 		//TODO 可以设置多个角色 
-		List<Role> roleList=roleService.findList("id=?",new Object[]{userList.get(0).getRole_id()});
+		List<Role> roleList=roleService.findList(new String[] {"id"},new Object[]{userList.get(0).getRole_id()},"AND");
 		
 		if (roleList != null) {
 			//设置角色

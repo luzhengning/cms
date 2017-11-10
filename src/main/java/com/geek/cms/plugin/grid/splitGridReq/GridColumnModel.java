@@ -1,4 +1,4 @@
-package com.geek.cms.plugin.entity.splitGridReq;
+package com.geek.cms.plugin.grid.splitGridReq;
 
 /**
  * 表格显示的列名

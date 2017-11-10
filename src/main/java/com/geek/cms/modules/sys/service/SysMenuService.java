@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import com.geek.cms.common.dbbase.CrudService;
 import com.geek.cms.dao.DbBasicDao;
 import com.geek.cms.modules.faramwer.factoryMethod.product.service.ServiceProduct;
-import com.geek.cms.modules.sys.dao.SysMenuProduct;
+import com.geek.cms.modules.sys.dao.SysMenuDao;
 import com.geek.cms.modules.sys.entity.Permission;
 import com.geek.cms.modules.sys.entity.SysMenu;
-import com.geek.cms.plugin.entity.splitGridReq.GridRequestModel;
+import com.geek.cms.plugin.grid.splitGridReq.GridRequestModel;
 import com.geek.cms.utils.db.DbUtil;
 
 /**
@@ -19,7 +19,7 @@ import com.geek.cms.utils.db.DbUtil;
  * @author 路正宁
  * @time:2017年10月13日 下午4:28:47
  */
-public class SysMenuService extends SysMenuProduct<SysMenu> {
+public class SysMenuService extends SysMenuDao {
 
 	//父级id
 	private String ParentId="";

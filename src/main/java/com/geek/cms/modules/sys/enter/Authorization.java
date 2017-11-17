@@ -70,7 +70,7 @@ public class Authorization extends AuthorizingRealm {
 	        //设置权限
             //List<Permission> permissionList=permissionService.queryByRole(roleList.get(0).getPermission_id().split(","));
             List<Permission> permissionList=new ArrayList<Permission>();
-            Set<String> permissionNames = new HashSet<String>();
+            Set<String> permissionNames = new HashSet<String>(); 
             for (Permission permission : permissionList) {
                 permissionNames.add(permission.getPermission_name());
             }

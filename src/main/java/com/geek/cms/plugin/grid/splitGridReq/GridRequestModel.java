@@ -3,7 +3,7 @@ package com.geek.cms.plugin.grid.splitGridReq;
 import com.geek.cms.plugin.grid.splitPage.SplitPage;
 
 /**
- * 表格请求的数据
+ * 表格请求到服务端的数据
  * @author luzhengning
  *
  */

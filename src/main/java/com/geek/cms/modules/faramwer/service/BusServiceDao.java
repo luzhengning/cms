@@ -1,11 +1,11 @@
-package com.geek.cms.modules.faramwer.factoryMethod.product.service;
+package com.geek.cms.modules.faramwer.service;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import com.geek.cms.plugin.grid.splitGridReq.GridRequestModel;
 
-public interface ServiceProductDao<T>  {
+public interface BusServiceDao<T>  {
 	public boolean add(T t);
 	public boolean delete(String id) throws SQLException;
 	public boolean delete(String[] paramNames,Object[] params,String andOr) throws SQLException;

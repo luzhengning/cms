@@ -33,6 +33,7 @@ import com.geek.cms.modules.sys.entity.User;
 import com.geek.cms.modules.sys.service.PermissionService;
 import com.geek.cms.modules.sys.service.RoleService;
 import com.geek.cms.modules.sys.service.UserService;
+import com.geek.cms.utils.StringUtil;
 
 
 /**
@@ -42,6 +43,8 @@ import com.geek.cms.modules.sys.service.UserService;
  */
 public class Authorization extends AuthorizingRealm {
 	private UserService userService=new UserService();
+	
+	private User user=null;
 	/**
 	 * 返回权限角色信息
 	 */
@@ -53,10 +56,8 @@ public class Authorization extends AuthorizingRealm {
 		UserService userService=new UserService();
 		RoleService roleService=new RoleService();
 		PermissionService permissionService=new PermissionService();
-		//查找用户
-		List<User> userList= userService.findBySql("account=?",new Object[]{account});
-		//TODO 可以设置多个角色 
-		List<Role> roleList=roleService.findList(new String[] {"id"},new Object[]{userList.get(0).getRole_id()},"AND");
+		//可以设置多个角色 
+		List<Role> roleList=roleService.findByIds(StringUtil.stringToArray(user.getRole_id(),","));
 		
 		if (roleList != null) {
 			//设置角色
@@ -87,8 +88,6 @@ public class Authorization extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		String account = ((String)token.getPrincipal()).trim();  //得到用户名  
         String password = new String((char[])token.getCredentials()).trim(); //得到密码  
-        
-        User user=new User();
         user.setAccount(account);
         user.setPassword(password);
         if(userService.login(user)!=null) {  
@@ -96,7 +95,7 @@ public class Authorization extends AuthorizingRealm {
         	Subject subject = SecurityUtils.getSubject();
         	return new SimpleAuthenticationInfo(account, password, getName());  
         }  
-        if(userService.findBySql("account=?", new Object[]{account}).size()==0)
+        if(userService.findList(new String[] {"account"}, new Object[]{account},"AND").size()==0)
         {
         	throw new UnknownAccountException(); //如果用户名错误  
         }else

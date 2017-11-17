@@ -10,8 +10,8 @@ public class SqlUtil {
 	 * @param names
 	 * @return
 	 */
-	public static String namesArrayToSql(String[] names,String andOr) {
-		String sql=" where 1=1 AND ";
+	public static String namesArrayToQuerySql(String[] names,String andOr) {
+		String sql=" where ";
 		for(int i=0;i<names.length;i++) {
 			if((names.length-1)==i)
 				sql+=names[i]+"=?";

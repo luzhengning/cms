@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.geek.cms.common.dbbase.CrudService;
 import com.geek.cms.dao.DbBasicDao;
-import com.geek.cms.modules.faramwer.factoryMethod.product.service.ServiceProduct;
+import com.geek.cms.modules.faramwer.service.BusService;
 import com.geek.cms.modules.sys.dao.SysMenuDao;
 import com.geek.cms.modules.sys.entity.Permission;
 import com.geek.cms.modules.sys.entity.SysMenu;
@@ -36,7 +36,7 @@ public class SysMenuService extends SysMenuDao {
 	 * @return
 	 */
 	public List<SysMenu> findListByRoleId(Object roleId,Object parentId,int depthNum,HttpServletRequest request) {
-		String sql="SELECT * FROM sys_tree_menu WHERE parent_id=? ORDER BY sort_num DESC";
+		String sql=querySql+"WHERE parent_id=? ORDER BY sort_num DESC";
 		//sql中的查询参数
 		Object[] params=null;
 		if(parentId!=null){
@@ -91,17 +91,21 @@ public class SysMenuService extends SysMenuDao {
 		}
 		return menu;
 	}
-	//查询角色是否存在
-	private boolean roleExits(String role,String[] Roles){
-		if(Roles==null)return false;
-		for(String str:Roles){
+	/**
+	 * 查询角色是否存在
+	 * @param role 要查询的角色
+	 * @param roles 角色列表
+	 * @return
+	 */
+	public boolean roleExits(String role,String[] roles){
+		if(roles==null)return false;
+		for(String str:roles){
 			if(str.equals(role))return true;
 		}
 		return false;
 	}
 	public boolean add(SysMenu menu) {
-		String sql="INSERT INTO sys_tree_menu(name,parent_id,url,sort_num,role_id,index_select,create_time,create_by,is_enable) "
-				+ "VALUES(?,?,?,?,?,?,?,?,?)";
+		String sql=insertSql;
 		Object[] params={
 				menu.getName(),
 				menu.getParent_id(),
@@ -114,13 +118,9 @@ public class SysMenuService extends SysMenuDao {
 				menu.getIs_enable()};
 		return super.add(sql, params);
 	}
-	public boolean delete(String id) throws SQLException {
-		String sql="DELETE FROM sys_tree_menu WHERE id=?";
-		Object[] params={id};
-		return super.delete(sql, params);
-	}
+
 	public boolean update(SysMenu menu) {
-		String sql="UPDATE sys_tree_menu SET NAME=?,parent_id=?,url=?,sort_num=?,role_id=?,index_select=?,update_time=?,create_by=?,is_enable=? WHERE id=?";
+		String sql=updateSql;
 		Object[] params={
 				menu.getName(),
 				menu.getParent_id(),
@@ -134,31 +134,12 @@ public class SysMenuService extends SysMenuDao {
 				menu.getId()};
 		return  super.update(sql, params);
 	}
-	public SysMenu load(String id) {
-		String sql="SELECT * FROM sys_tree_menu where id=?";
-		return super.load(sql, new Object[]{id});
-	}
-	public int maximum(GridRequestModel model) {
-		// TODO 自动生成的方法存根
-		return 0;
-	}
-	public List<SysMenu> findList(String sql, Object[] params) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-	public int maximum(String sql, Object[] params) {
-		// TODO 自动生成的方法存根
-		return 0;
-	}
 
-	public boolean setIndex(String id){
-		String sql="UPDATE sys_tree_menu SET index_select=? WHERE id=?";
-		return super.update(sql, new Object[]{"1",id});
-	}
-	public boolean clearIndexSelect(){
-		String sql="UPDATE sys_tree_menu SET index_select=?";
-		return super.update(sql, new Object[]{""});
-	}
+	/**
+	 * 设置查询的父节点
+	 * @param parentId
+	 * @param request
+	 */
 	public void setParentId(Object parentId,HttpServletRequest request){
 		setParentId(parentId.toString(),request);
 		request.getSession().setAttribute("depthCount", 0);
@@ -186,12 +167,6 @@ public class SysMenuService extends SysMenuDao {
 	}
 	private String getParentId(HttpServletRequest request){
 		return request.getSession().getAttribute("ParentId").toString();
-	}
-
-	@Override
-	public List<SysMenu> findList(GridRequestModel model) {
-		// TODO 自动生成的方法存根
-		return null;
 	}
 
 }

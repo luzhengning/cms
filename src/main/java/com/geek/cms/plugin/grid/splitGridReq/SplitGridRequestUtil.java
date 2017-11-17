@@ -1,9 +1,8 @@
-package com.geek.cms.plugin.grid;
+package com.geek.cms.plugin.grid.splitGridReq;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.geek.cms.dao.DbBasicDao;
-import com.geek.cms.plugin.grid.splitGridReq.GridRequestModel;
 import com.geek.cms.plugin.grid.splitPage.SplitPage;
 
 

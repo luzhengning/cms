@@ -18,7 +18,7 @@ import com.geek.cms.plugin.grid.splitGridReq.GridRequestModel;
  *
  * @param <T>
  */
-public abstract class DbUtil<T> /*implements DbUtilDao<T>*/ {
+public abstract class DbUtil<T> {
 	
 	public static boolean isLog=true;
 	
@@ -33,7 +33,7 @@ public abstract class DbUtil<T> /*implements DbUtilDao<T>*/ {
 	 * 插入
 	 */
 	protected boolean add(String sql,Object params[]) {
-		if(isLog)System.out.println(sql);
+		if(isLog)System.out.println("DbUtil.add():"+sql+" @:"+paramsToStr(params));
 		try {
 			int result=runner.update(sql, params);
 			if(result>=1)return true;
@@ -46,7 +46,7 @@ public abstract class DbUtil<T> /*implements DbUtilDao<T>*/ {
 	}
 
 	protected boolean delete(String sql,Object params[]) throws SQLException {
-		if(isLog)System.out.println(sql);
+		if(isLog)System.out.println("DbUtil.delete():"+sql+" @:"+paramsToStr(params));
 		try {
 			if(runner.update(sql, params)>=1)return true;
 		} catch (SQLException e) {
@@ -59,7 +59,7 @@ public abstract class DbUtil<T> /*implements DbUtilDao<T>*/ {
 	}
 
 	protected boolean update(String sql,Object params[]) {
-		if(isLog)System.out.println(sql);
+		if(isLog)System.out.println("DbUtil.update():"+sql+" @:"+paramsToStr(params));
 		try {
 			if(runner.update(sql, params)>=1)return true;
 		} catch (SQLException e) {
@@ -72,7 +72,7 @@ public abstract class DbUtil<T> /*implements DbUtilDao<T>*/ {
 	}
 
 	protected T load(String sql,Object params[]) {
-		if(isLog)System.out.println(sql);
+		if(isLog)System.out.println("DbUtil.load():"+sql+" @:"+paramsToStr(params));
 		try {
 			return (T)(runner.query(sql,new BeanHandler(clz),params));
 		} catch (SQLException e) {
@@ -84,7 +84,7 @@ public abstract class DbUtil<T> /*implements DbUtilDao<T>*/ {
 		return null;
 	}
 	protected List<T> find(String sql,Object params[]){
-		if(isLog)System.out.println(sql);
+		if(isLog)System.out.println("DbUtil.find():"+sql+" @:"+paramsToStr(params));
 		try {
 			return runner.query(sql, new BeanListHandler(clz), params);
 		} catch (SQLException e) {
@@ -96,7 +96,7 @@ public abstract class DbUtil<T> /*implements DbUtilDao<T>*/ {
 		return null;
 	}
 	protected int getNum(String sql,Object[] params){
-		if(isLog)System.out.println(sql);
+		if(isLog)System.out.println("DbUtil.getNum():"+sql+" @:"+paramsToStr(params));
 		try {
 			int count = ((Long)runner.query(sql, params,new ScalarHandler(1))).intValue();
 			return count;
@@ -141,5 +141,18 @@ public abstract class DbUtil<T> /*implements DbUtilDao<T>*/ {
 			}
 		});
 		return obj;
+	}
+	/**
+	 * 查询参数转字符串
+	 * @param params
+	 * @return
+	 */
+	private String paramsToStr(Object[] params) {
+		if(params==null)return "";
+		String value="";
+		for(int i=0;i<params.length;i++) {
+			value+=params[i].toString()+",";
+		}
+		return value.substring(0, value.length()-1);
 	}
 }

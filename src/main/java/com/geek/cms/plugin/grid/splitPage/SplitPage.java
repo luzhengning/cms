@@ -73,7 +73,7 @@ public class SplitPage {
         this.setCurrentNum(newPage);// 记得重新设置当期页面  
         System.out.println("当前页码："+newPage+" LIMIT "+this.statrNum+","+this.pageRow);
         limit=" LIMIT "+this.statrNum+","+this.pageRow;
-        return " LIMIT "+this.statrNum+","+this.pageRow;  
+        return limit;  
     } 
     
 	public int getStatrNum() {

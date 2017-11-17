@@ -1,7 +1,11 @@
 package com.geek.cms.modules.sys.dao;
 
-import com.geek.cms.modules.faramwer.factoryMethod.product.service.ServiceProduct;
-import com.geek.cms.modules.faramwer.factoryMethod.product.service.ServiceProductDao;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import com.geek.cms.modules.faramwer.service.BusService;
+import com.geek.cms.modules.faramwer.service.BusServiceDao;
 import com.geek.cms.modules.sys.entity.SysMenu;
 import com.geek.cms.modules.sys.entity.User;
 import com.geek.cms.utils.db.DbUtil;
@@ -11,9 +15,23 @@ import com.geek.cms.utils.db.DbUtil;
  * @author luzhengning
  * 2017年11月1日 下午2:07:25
  */
-public abstract class SysMenuDao extends ServiceProduct<SysMenu> {
+public abstract class SysMenuDao extends BusService<SysMenu> {
 	public SysMenuDao(Class clz) {
 		super(clz);
+		super.querySql="SELECT * FROM sys_tree_menu ";
+		super.deleteSql="DELETE FROM sys_tree_menu ";
+		super.updateSql="UPDATE sys_tree_menu SET NAME=?,parent_id=?,url=?,sort_num=?,role_id=?,index_select=?,update_time=?,create_by=?,is_enable=? WHERE id=? ";
+		super.insertSql="INSERT INTO sys_tree_menu(name,parent_id,url,sort_num,role_id,index_select,create_time,create_by,is_enable) VALUES(?,?,?,?,?,?,?,?,?) ";
+		super.countSql="SELECT COUNT(*) FROM sys_tree_menu ";
 	}
-
+	public abstract List<SysMenu> findListByRoleId(Object roleId,Object parentId,int depthNum,HttpServletRequest request);
+	
+	public boolean setIndex(String id){
+		String sql="UPDATE sys_tree_menu SET index_select=? WHERE id=?";
+		return super.update(sql, new Object[]{"1",id});
+	}
+	public boolean clearIndexSelect(){
+		String sql="UPDATE sys_tree_menu SET index_select=?";
+		return super.update(sql, new Object[]{""});
+	}
 }

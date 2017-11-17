@@ -4,13 +4,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.geek.cms.common.dbbase.CrudService;
-import com.geek.cms.modules.faramwer.factoryMethod.product.service.ServiceProduct;
+import com.geek.cms.modules.faramwer.service.BusService;
 import com.geek.cms.modules.sys.dao.PermissionDao;
 import com.geek.cms.modules.sys.entity.Permission;
 import com.geek.cms.modules.sys.entity.Role;
 import com.geek.cms.modules.sys.entity.User;
-import com.geek.cms.plugin.grid.SplitGridRequestUtil;
 import com.geek.cms.plugin.grid.splitGridReq.GridRequestModel;
+import com.geek.cms.plugin.grid.splitGridReq.SplitGridRequestUtil;
 
 /**
  * 权限操作service
@@ -49,20 +49,16 @@ public class PermissionService extends PermissionDao {
 		};
 		return super.update(updateSql, params);
 	}
+	/**
+	 * 查询多个权限
+	 */
 	@Override
 	public List<Permission> findByIds(String[] ids) {
-		String sql=querySql;
-		if(ids!=null) {
-			if(ids.length>0) {
-				sql+=" where 1=1 ";
-				for(int i=0;i<ids.length;i++) {
-					sql=sql+" OR id=?";
-				}
-			}
+		if(ids==null) return null;
+		String[] idNames=new String[ids.length];
+		for(int i=0;i<ids.length;i++) {
+			idNames[i]="id";
 		}
-		return super.find(sql, ids);
+		return super.findList(idNames, ids, "OR");
 	}
-
-
-
 }

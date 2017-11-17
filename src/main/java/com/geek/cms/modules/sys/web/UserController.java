@@ -108,8 +108,8 @@ public class UserController {
 	@RequestMapping("/test")
 	public void test() {
 		RoleDao dao=new RoleService();
-		int count=dao.maximum(new String[] {"id","id"}, new Object[] {"1","3"},"AND");
-		List<Role> list=dao.findList(new String[] {"id","id"}, new Object[] {"1","3"},"AND");
+		int count=dao.maximum(new String[] {"id","id"}, new Object[] {"1","3"},"OR");
+		List<Role> list=dao.findList(new String[] {"id","id"}, new Object[] {"1","3"},"OR");
 		Role role=dao.load("3");
 		//简单的解决办法
 		synchronized(this){

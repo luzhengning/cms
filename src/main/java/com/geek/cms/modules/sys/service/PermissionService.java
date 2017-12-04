@@ -22,7 +22,6 @@ public class PermissionService extends PermissionDao {
 	public PermissionService() {
 		super(Permission.class);
 	}
-	@Override
 	public boolean add(Permission t) {
 		Object[] params=new Object[]{
 				t.getPermission_name(),
@@ -35,7 +34,6 @@ public class PermissionService extends PermissionDao {
 		};
 		return super.add(insertSql, params);
 	}
-	@Override
 	public boolean update(Permission t) {
 		Object[] params=new Object[]{
 				t.getPermission_name(),

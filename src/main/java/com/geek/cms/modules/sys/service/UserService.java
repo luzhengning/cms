@@ -2,6 +2,9 @@ package com.geek.cms.modules.sys.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Random;
+
+import org.springframework.cache.annotation.Cacheable;
 
 import com.geek.cms.common.dbbase.CrudService;
 import com.geek.cms.dao.DbBasicDao;
@@ -80,8 +83,6 @@ public class UserService extends UserDao {
 		Object[] params=new Object[]{user.getAccount(),user.getPassword()};
 		return super.load(sql, params);
 	}
-
-
 
 
 

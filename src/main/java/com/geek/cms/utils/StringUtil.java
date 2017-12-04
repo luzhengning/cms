@@ -8,7 +8,7 @@ public class StringUtil {
 	 * @param s
 	 * @return
 	 */
-	public static String arrayJoinString(String[] values,String s){
+	public static String arrayToStr(String[] values,String s){
 		if(values==null)return "";
 		String result="";
 		for(String str:values){
@@ -17,12 +17,12 @@ public class StringUtil {
 		return result.substring(0, result.length() - 1);
 	}
 	/**
-	 * 字符串转数组
+	 * 指定字符串分割字符
 	 * @param values 要转数组的字符串
 	 * @param s 字符串中的分割符
 	 * @return
 	 */
-	public static String[] stringToArray(String values,String s){
+	public static String[] strToArray(String values,String s){
 		if(values==null)return null;
 		if(values.length()==0)return null;
 		return values.split(s);

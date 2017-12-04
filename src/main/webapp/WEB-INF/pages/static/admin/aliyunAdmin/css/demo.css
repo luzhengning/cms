@@ -3,7 +3,6 @@
 /**
   Demo CSS
 *************************************/
-.layout-mock *:not(.ui-splitbar){
-  background : #eee no-repeat center;
+.layout-mock *:not (.ui-splitbar ){
+	background: #eee no-repeat center;
 }
-

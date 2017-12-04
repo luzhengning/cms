@@ -10,12 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.stereotype.Controller; 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.geek.cms.modules.sys.dao.SysMenuDao;
 import com.geek.cms.modules.sys.entity.SysMenu;
 import com.geek.cms.modules.sys.service.SysMenuService;
 import com.geek.cms.plugin.uiBsTree.BsTreeUtil;
@@ -65,8 +63,8 @@ public class SysMenuController {
 	
 	/**
 	 * boostarp样式的tree菜单json数据
-	 * @throws MapperException 
-	 * @throws IOException 
+	 * @throws MapperException
+	 * @throws IOException
 	 */
 	@RequestMapping("/loadBsTree")
 	public void loadBsTree(HttpServletRequest request,  

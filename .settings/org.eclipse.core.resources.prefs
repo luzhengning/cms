@@ -1,5 +1,9 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/geek/cms/controller/EnterController.java=UTF-8
+encoding//src/main/java/com/geek/cms/modules/listener/WebContextListener.java=UTF-8
+encoding//src/main/java/com/geek/cms/modules/sys/web=GBK
+encoding//src/main/java/com/geek/cms/modules/sys/web/SysMenuController.java=UTF-8
+encoding//src/main/java/com/geek/cms/modules/sys/web/UserController.java=UTF-8
 encoding//src/main/webapp/WEB-INF/pages=UTF-8
 encoding//src/main/webapp/WEB-INF/pages/view/Admin/Administrators.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/pages/view/Admin/login.jsp=UTF-8

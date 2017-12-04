@@ -1,15 +1,9 @@
 package com.geek.cms.modules.sys.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import com.geek.cms.common.dbbase.CrudService;
-import com.geek.cms.modules.faramwer.service.BusService;
 import com.geek.cms.modules.sys.dao.RoleDao;
 import com.geek.cms.modules.sys.entity.Role;
-import com.geek.cms.modules.sys.entity.User;
-import com.geek.cms.plugin.grid.splitGridReq.GridRequestModel;
-import com.geek.cms.plugin.grid.splitGridReq.SplitGridRequestUtil;
 
 public class RoleService extends RoleDao {
 
@@ -19,7 +13,6 @@ public class RoleService extends RoleDao {
 		super(Role.class);
 	}
 
-	@Override
 	public boolean add(Role t) {
 		Object[] params=new Object[] {
 				t.getRole_name(),
@@ -32,7 +25,6 @@ public class RoleService extends RoleDao {
 		};
 		return super.add(insertSql, params);
 	}
-	@Override
 	public boolean update(Role t) {
 		Object[] params=new Object[] {
 				t.getRole_name(),
@@ -58,6 +50,7 @@ public class RoleService extends RoleDao {
 		}
 		return super.findList(idNames, ids, "OR");
 	}
+
 
 	
 

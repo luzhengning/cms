@@ -2,19 +2,28 @@
 <html>
 <head>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link href="../static/bootstrap-3.3.7-dist/css/bootstrap.min.css" title="" rel="stylesheet" />
-	<link rel="stylesheet" href="../static/Plugin/zTree/css/demo.css" type="text/css">
-	<link rel="stylesheet" href="../static/Plugin/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
-	<script type="text/javascript" src="../static/jQuery/jquery-1.4.4.min.js"></script>
-	<script type="text/javascript" src="../static/jQuery/zTree/jquery.ztree.core.js"></script>
-	<script type="text/javascript" src="../static/jQuery/zTree/jquery.ztree.excheck.js"></script>
-	<script type="text/javascript" src="../static/jQuery/zTree/jquery.ztree.exedit.js"></script>
-	<script src="../static/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
-	<!--  <script type="text/javascript" src="../../js/jquery.ztree.excheck.js"></script>
+<link href="../static/bootstrap-3.3.7-dist/css/bootstrap.min.css"
+	title="" rel="stylesheet" />
+<link rel="stylesheet" href="../static/Plugin/zTree/css/demo.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="../static/Plugin/zTree/css/zTreeStyle/zTreeStyle.css"
+	type="text/css">
+<script type="text/javascript"
+	src="../static/jQuery/jquery-1.4.4.min.js"></script>
+<script type="text/javascript"
+	src="../static/jQuery/zTree/jquery.ztree.core.js"></script>
+<script type="text/javascript"
+	src="../static/jQuery/zTree/jquery.ztree.excheck.js"></script>
+<script type="text/javascript"
+	src="../static/jQuery/zTree/jquery.ztree.exedit.js"></script>
+<script src="../static/bootstrap-3.3.7-dist/js/bootstrap.min.js"
+	type="text/javascript"></script>
+<!--  <script type="text/javascript" src="../../js/jquery.ztree.excheck.js"></script>
 	  <script type="text/javascript" src="../../js/jquery.ztree.exedit.js"></script>-->
-	<SCRIPT type="text/javascript">
+<SCRIPT type="text/javascript">
 		
 		var setting = {
 			edit: {//启用编辑
@@ -248,40 +257,58 @@
 		}
 		
 	</SCRIPT>
-	<style type="text/css">
-		.ztree li span.button.add {margin-left:2px; margin-right: -1px; background-position:-144px 0; vertical-align:top; *vertical-align:middle}
-	</style>
+<style type="text/css">
+.ztree li span.button.add {
+	margin-left: 2px;
+	margin-right: -1px;
+	background-position: -144px 0;
+	vertical-align: top;
+	*vertical-align: middle
+}
+</style>
 </HEAD>
 
 <BODY>
-<h1>自定义图标 -- icon 属性</h1>
-<h6>[ 文件路径: core/custom_icon.html ]</h6>
-<div class="content_wrap">
-	<div class="zTreeDemoBackground left">
-		<ul id="treeDemo" class="ztree"></ul>
+	<h1>自定义图标 -- icon 属性</h1>
+	<h6>[ 文件路径: core/custom_icon.html ]</h6>
+	<div class="content_wrap">
+		<div class="zTreeDemoBackground left">
+			<ul id="treeDemo" class="ztree"></ul>
+		</div>
+		<div class="right">
+			<ul id="treeDemo2" class="ztree"></ul>
+		</div>
+		<div class="right">
+			&nbsp;&nbsp;&nbsp;&nbsp;[ <a id="nocheckTrue" href="#"
+				title="set checkbox to be hidden." onclick="return false;">指定隐藏多选按钮</a>
+			] &nbsp;&nbsp;&nbsp;&nbsp;[ <a id="nocheckFalse" href="#"
+				title="set checkbox to be show." onclick="return false;">指定显示多选按钮</a>
+			] <br /> &nbsp;&nbsp;&nbsp;&nbsp;[ <a id="disabledTrue" href="#"
+				title="set checkbox to be disabled." onclick="return false;">禁用</a>
+			] &nbsp;&nbsp;&nbsp;&nbsp;[ <a id="disabledFalse" href="#"
+				title="set checkbox to be abled." onclick="return false;">取消禁用</a> ]
+			<li><p>
+					去勾选 checkbox 比较下面的数字变化：<br />
+				<ul id="log" class="log" style="height: 110px;">
+					<li>当前被勾选的节点共 <span id="checkCount" class="highlight_red"></span>
+						个
+					</li>
+					<li>当前未被勾选的节点共 <span id="nocheckCount" class="highlight_red"></span>
+						个
+					</li>
+					<li>勾选状态对比规则：<input type="radio" id="init" name="stateType"
+						class="radio first" checked /><span>与 zTree 初始化时对比</span><br /> <input
+						type="radio" id="last" name="stateType" class="radio first"
+						style="margin-left: 108px;" /><span>与上一次勾选后对比</span></li>
+					<li>当前被修改勾选状态的节点共 <span id="changeCount" class="highlight_red"></span>
+						个
+					</li>
+				</ul>
+				</p></li>
+
+			<button name="name" type="button" onClick="submitDemo()">提交</button>
+			<div id="demoHtml"></div>
+		</div>
 	</div>
-	<div class="right">
-		<ul id="treeDemo2" class="ztree"></ul>
-	</div>
-	<div class="right">
-		&nbsp;&nbsp;&nbsp;&nbsp;[ <a id="nocheckTrue" href="#" title="set checkbox to be hidden." onclick="return false;">指定隐藏多选按钮</a> ]
-		&nbsp;&nbsp;&nbsp;&nbsp;[ <a id="nocheckFalse" href="#" title="set checkbox to be show." onclick="return false;">指定显示多选按钮</a> ]
-		<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;[ <a id="disabledTrue" href="#" title="set checkbox to be disabled." onclick="return false;">禁用</a> ]
-		&nbsp;&nbsp;&nbsp;&nbsp;[ <a id="disabledFalse" href="#" title="set checkbox to be abled." onclick="return false;">取消禁用</a> ]
-		<li><p>去勾选 checkbox 比较下面的数字变化：<br/>
-			<ul id="log" class="log" style="height:110px;">
-				<li>当前被勾选的节点共 <span id="checkCount" class="highlight_red"></span> 个</li>
-				<li>当前未被勾选的节点共 <span id="nocheckCount" class="highlight_red"></span> 个</li>
-				<li>勾选状态对比规则：<input type="radio" id="init" name="stateType" class="radio first" checked /><span>与 zTree 初始化时对比</span><br/>
-					<input type="radio" id="last" name="stateType" class="radio first" style="margin-left:108px;"/><span>与上一次勾选后对比</span></li>
-				<li>当前被修改勾选状态的节点共 <span id="changeCount" class="highlight_red"></span> 个</li>
-			</ul></p>
-		</li>
-		
-		<button name="name" type="button" onClick="submitDemo()">提交</button>
-	<div id="demoHtml"></div>
-	</div>
-</div>
 </BODY>
 </HTML>

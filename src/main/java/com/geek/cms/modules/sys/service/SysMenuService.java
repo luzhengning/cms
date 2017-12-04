@@ -1,18 +1,11 @@
 package com.geek.cms.modules.sys.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.geek.cms.common.dbbase.CrudService;
-import com.geek.cms.dao.DbBasicDao;
-import com.geek.cms.modules.faramwer.service.BusService;
 import com.geek.cms.modules.sys.dao.SysMenuDao;
-import com.geek.cms.modules.sys.entity.Permission;
 import com.geek.cms.modules.sys.entity.SysMenu;
-import com.geek.cms.plugin.grid.splitGridReq.GridRequestModel;
-import com.geek.cms.utils.db.DbUtil;
 
 /**
  * 后台左侧菜单

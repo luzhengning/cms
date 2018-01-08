@@ -297,8 +297,8 @@
 						个
 					</li>
 					<li>勾选状态对比规则：<input type="radio" id="init" name="stateType"
-						class="radio first" checked /><span>与 zTree 初始化时对比</span><br /> <input
-						type="radio" id="last" name="stateType" class="radio first"
+						class="radio first" checked /><span>与 zTree 初始化时对比</span><br />
+						<input type="radio" id="last" name="stateType" class="radio first"
 						style="margin-left: 108px;" /><span>与上一次勾选后对比</span></li>
 					<li>当前被修改勾选状态的节点共 <span id="changeCount" class="highlight_red"></span>
 						个

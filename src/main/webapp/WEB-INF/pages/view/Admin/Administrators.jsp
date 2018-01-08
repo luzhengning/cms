@@ -204,7 +204,7 @@ $(".left-main .sidebar-fold").click(function(){
 			$.ajax({
 	    		url:'<%=request.getContextPath() %>/sysmenu/load',
 	    		data:{"parentId":parentId,"depthNum":depthNum},
-	    		async: false,
+	    		async: false,//禁止异步查询
 	    		success:function(resultData){
 	    			data=resultData;
 	    		},

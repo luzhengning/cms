@@ -1,4 +1,4 @@
-package com.geek.cms.modules.sys.enter;
+package com.geek.cms.core.shiro.token;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +16,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -24,6 +25,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,7 +44,7 @@ import com.geek.cms.utils.StringUtil;
  * @author 路正宁
  * @time:2017年10月13日 下午3:26:28
  */
-public class Authorization extends AuthorizingRealm {
+public class AuthorizationRealm extends AuthorizingRealm {
 	private UserService userService=new UserService();
 	
 	/**
@@ -56,7 +58,6 @@ public class Authorization extends AuthorizingRealm {
 		User user=(User)(SecurityUtils.getSubject().getPrincipal());
 		if(user==null)return null;
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-		UserService userService=new UserService();
 		RoleService roleService=new RoleService();
 		PermissionService permissionService=new PermissionService();
 		//获取用户角色Id 
@@ -106,7 +107,10 @@ public class Authorization extends AuthorizingRealm {
         user.setAccount(account);
         user.setPassword(password);
         user=userService.login(user);
-        if(user!=null) {  
+        if(null!=user) {  
+        	/*if(enable.equales("1")) {
+        		throw new DisabledAccountException("帐号已经禁止登录！");
+        	}*/
         	//登录成功
         	return new SimpleAuthenticationInfo(user, password, getName());  
         }
@@ -118,6 +122,23 @@ public class Authorization extends AuthorizingRealm {
         	throw new IncorrectCredentialsException(); //如果密码错误  
         }  
         
+	}
+	/**
+     * 清空当前用户权限信息
+     */
+	public  void clearCachedAuthorizationInfo() {
+		PrincipalCollection principalCollection = SecurityUtils.getSubject().getPrincipals();
+		SimplePrincipalCollection principals = new SimplePrincipalCollection(
+				principalCollection, getName());
+		super.clearCachedAuthorizationInfo(principals);
+	}
+	/**
+	 * 指定principalCollection 清除
+	 */
+	public void clearCachedAuthorizationInfo(PrincipalCollection principalCollection) {
+		SimplePrincipalCollection principals = new SimplePrincipalCollection(
+				principalCollection, getName());
+		super.clearCachedAuthorizationInfo(principals);
 	}
 
 }

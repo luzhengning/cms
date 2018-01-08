@@ -97,36 +97,6 @@ public class SysMenuService extends SysMenuDao {
 		}
 		return false;
 	}
-	public boolean add(SysMenu menu) {
-		String sql=insertSql;
-		Object[] params={
-				menu.getName(),
-				menu.getParent_id(),
-				menu.getUrl(),
-				menu.getSort_num(),
-				menu.getRole_id(),
-				menu.getIndex_select(),
-				menu.getCreate_time(),
-				menu.getCreate_by(),
-				menu.getIs_enable()};
-		return super.add(sql, params);
-	}
-
-	public boolean update(SysMenu menu) {
-		String sql=updateSql;
-		Object[] params={
-				menu.getName(),
-				menu.getParent_id(),
-				menu.getUrl(),
-				menu.getSort_num(),
-				menu.getRole_id(),
-				menu.getIndex_select(),
-				menu.getUpdate_time(),
-				menu.getCreate_by(),
-				menu.getIs_enable(),
-				menu.getId()};
-		return  super.update(sql, params);
-	}
 
 	/**
 	 * 设置查询的父节点
@@ -161,5 +131,7 @@ public class SysMenuService extends SysMenuDao {
 	private String getParentId(HttpServletRequest request){
 		return request.getSession().getAttribute("ParentId").toString();
 	}
+
+	
 
 }

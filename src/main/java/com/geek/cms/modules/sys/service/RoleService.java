@@ -13,31 +13,6 @@ public class RoleService extends RoleDao {
 		super(Role.class);
 	}
 
-	public boolean add(Role t) {
-		Object[] params=new Object[] {
-				t.getRole_name(),
-				t.getRole_mark(),
-				t.getPermission_id(),
-				t.getCreate_time(),
-				t.getUpdate_time(),
-				t.getLast_user(),
-				t.getIs_enable()
-		};
-		return super.add(insertSql, params);
-	}
-	public boolean update(Role t) {
-		Object[] params=new Object[] {
-				t.getRole_name(),
-				t.getRole_mark(),
-				t.getPermission_id(),
-				t.getCreate_time(),
-				t.getUpdate_time(),
-				t.getLast_user(),
-				t.getIs_enable(),
-				t.getId()
-		};
-		return super.update(updateSql, params);
-	}
 	/**
 	 * 查询多个角色
 	 */
@@ -50,6 +25,8 @@ public class RoleService extends RoleDao {
 		}
 		return super.findList(idNames, ids, "OR");
 	}
+
+	
 
 
 	

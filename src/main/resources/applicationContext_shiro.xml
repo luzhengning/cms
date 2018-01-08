@@ -10,7 +10,7 @@
 
 
 	<!-- Realm实现 -->
-	<bean id="myRealm" class="com.geek.cms.modules.sys.enter.Authorization"></bean>
+	<bean id="myRealm" class="com.geek.cms.core.shiro.token.AuthorizationRealm"></bean>
 	<!-- 安全管理器 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<!-- 单realm应用。如果有多个realm，使用‘realms’属性代替 -->
@@ -33,7 +33,7 @@
 	</bean>
 
 	<!-- Shiro在注解模式下，登录失败，与没有权限均是通过抛出异常。并且默认并没有去处理或者捕获这些异常。在springMVC下需要配置捕获相应异常来通知用户信息，如果不配置异常会抛出到页面 -->
-	<!-- <bean
+	<bean
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
@@ -45,6 +45,6 @@
 				</prop>
 			</props>
 		</property>
-	</bean> -->
+	</bean> 
 
 </beans> 

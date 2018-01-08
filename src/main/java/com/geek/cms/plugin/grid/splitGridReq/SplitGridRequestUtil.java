@@ -2,14 +2,14 @@ package com.geek.cms.plugin.grid.splitGridReq;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.geek.cms.dao.DbBasicDao;
+import com.geek.cms.modules.core.service.BusServiceDao;
 import com.geek.cms.plugin.grid.splitPage.SplitPage;
 
 
 
 public class SplitGridRequestUtil {
 	//页面分页处理
-	public static <T> SplitPage getSplitPage(GridRequestModel model,DbBasicDao<T> dao, HttpServletRequest request){
+	public static <T> SplitPage getSplitPage(GridRequestModel model,BusServiceDao<T> dao, HttpServletRequest request){
 		SplitPage splitPage=null;
 		String limit="";
 		String flag=request.getParameter("pageNo");
@@ -55,7 +55,7 @@ public class SplitGridRequestUtil {
 	 * @param dao
 	 * @return
 	 */
-	public static <T> GridRequestModel getModel(HttpServletRequest request,DbBasicDao<T> dao){
+	public static <T> GridRequestModel getModel(HttpServletRequest request,BusServiceDao<T> dao){
 		GridRequestModel model=new GridRequestModel();
 		//字段值
 		model.setParams(SplitGridRequestUtil.getReqeustParams(request));

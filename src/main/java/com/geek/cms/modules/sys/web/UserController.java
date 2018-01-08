@@ -1,9 +1,13 @@
 package com.geek.cms.modules.sys.web;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.Servlet;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,12 +17,15 @@ import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.geek.cms.modules.sys.entity.User;
 import com.geek.cms.modules.sys.service.UserService;
@@ -27,7 +34,7 @@ import com.geek.cms.modules.sys.service.UserService;
  * 用户Controller
  * @author luzhengning 2017年11月21日 下午3:54:28
  */
-@Controller
+@Controller()
 @RequestMapping("/user")
 public class UserController {
 
@@ -46,10 +53,11 @@ public class UserController {
 	 * @param request
 	 * @return
 	 * @throws UnsupportedEncodingException
+	 * @throws ServletException 
 	 */
-	@RequestMapping("/login")
+	@RequestMapping(name="asdf",value="/login")
 	public ModelAndView login(@ModelAttribute("user") User user, HttpSession session, HttpServletRequest request)
-			throws UnsupportedEncodingException {
+			throws UnsupportedEncodingException, ServletException {
 		user.setAccount("asd");
 		user.setPassword("asdf");
 		Map<String, String> model = new HashMap<String, String>();
@@ -106,8 +114,10 @@ public class UserController {
 	}
 
 	@RequestMapping("/get")
+	//属于user或者admin之一;修改logical为OR 即可
+	@RequiresRoles(value={"user","13242"},logical=Logical.AND)
 	public void get() {
-		
+		userService.update(null, "");
 	}
 
 }

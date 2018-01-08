@@ -19,7 +19,7 @@ import com.sdicons.json.mapper.MapperException;
 public class EnterController {
 	
 	/**
-	 * 绠＄悊鍛樺叆鍙�
+	 * 管理员页面
 	 * @return
 	 */
 	@RequestMapping("/administrators")

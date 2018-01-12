@@ -117,7 +117,7 @@ public class UserController {
 	//属于user或者admin之一;修改logical为OR 即可
 	@RequiresRoles(value={"user","13242"},logical=Logical.AND)
 	public void get() {
-		userService.update(null, "");
+		//userService.update(null, "");
 	}
 
 }

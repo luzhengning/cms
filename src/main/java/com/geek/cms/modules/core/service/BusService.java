@@ -7,8 +7,10 @@ import java.util.List;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.geek.cms.core.database.AssemblySql;
-import com.geek.cms.modules.sys.entity.Permission;
-import com.geek.cms.plugin.grid.splitGridReq.GridRequestModel;
+import com.geek.cms.modules.sys.entity.Permissions;
+import com.geek.cms.modules.sys.entity.example.PermissionsExample;
+import com.geek.cms.plugin.grid.splitGridReq.GridColumn;
+import com.geek.cms.plugin.grid.splitGridReq.GridRequest;
 import com.geek.cms.plugin.grid.splitGridReq.SplitGridRequestUtil;
 import com.geek.cms.utils.SqlUtil;
 import com.geek.cms.utils.db.DbUtil;
@@ -18,15 +20,13 @@ import com.geek.cms.utils.db.DbUtil;
  * @author luzhengning
  * 2017年11月1日 下午2:07:25
  */
-public abstract class BusService<T> extends DbUtil<T> implements BusServiceDao<T> {
+public abstract class BusService<T> extends DbUtil<T> implements BusServiceDao<T,PermissionsExample> {
 	public BusService(Class clz) {
 		super(clz);
 	}
+	//sql结构
+	public AssemblySql assemblySql=new AssemblySql();
 	//以下变量在业务模块的Dao中赋值，注意SQL返回值类型必须和以下一致
-	//表名
-	public String tableName="";
-    //列名
-	public List<String> columnNames=new ArrayList<String>();
 	//返回业务实体
 	public String querySql="";
 	//返回Boolean类型
@@ -56,7 +56,7 @@ public abstract class BusService<T> extends DbUtil<T> implements BusServiceDao<T
 	public boolean delete(String[] paramNames,Object[] params,String andOr) throws SQLException {
 		return super.delete(deleteSql+SqlUtil.namesArrayToQuerySql(paramNames,andOr), params);
 	}
-	public List<T> findList(GridRequestModel model) {
+	public List<T> findList(GridRequest model) {
 		String sql=querySql+" where 1=1 ";
 		sql=(sql+model.getParamsNameSql());
 		return super.find(sql,model.getParams());
@@ -65,7 +65,7 @@ public abstract class BusService<T> extends DbUtil<T> implements BusServiceDao<T
 		String sql=querySql+SqlUtil.namesArrayToQuerySql(paramNames,andOr);
 		return super.find(sql, params);
 	}
-	public int maximum(GridRequestModel model) {
+	public int maximum(GridRequest model) {
 		String sql=countSql+" where 1=1 ";
 		if(model!=null){
 			if(model.getParamsName()!=null){
@@ -81,9 +81,6 @@ public abstract class BusService<T> extends DbUtil<T> implements BusServiceDao<T
 	 * 生成sql
 	 */
 	protected void setSql() {
-		AssemblySql assemblySql=new AssemblySql();
-		assemblySql.tableName=this.tableName;
-		assemblySql.columnNames=this.columnNames;
 		this.querySql=assemblySql.querySql();
 		this.insertSql=assemblySql.insertSql();
 		this.deleteSql=assemblySql.deleteSql();

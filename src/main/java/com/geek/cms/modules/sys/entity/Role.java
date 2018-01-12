@@ -1,90 +1,85 @@
 package com.geek.cms.modules.sys.entity;
 
-import java.util.List;
+import java.util.Date;
 
-/**
- * 角色
- * @author Administrator
- *
- */
 public class Role {
-	private String id;
-	private String role_name;
-	private String role_mark;
-	private String permission_id;
-	private String create_time;
-	private String update_time;
-	private String last_user;
-	private String is_enable;
-	
-	public Role(String id){
-		this.id=id;
-	}
-	public Role(){}
-	
-	/**
-	 * 权限
-	 */
-	private List<Permission> permissions;
-	
-	public List<Permission> getPermissions() {
-		return permissions;
-	}
-	public void setPermissions(List<Permission> permissions) {
-		this.permissions = permissions;
-	}
-	
-	public String getPermission_id() {
-		if(permission_id!=null)
-		return permission_id;
-		else return "";
-	}
-	public void setPermission_id(String permission_id) {
-		this.permission_id = permission_id;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getRole_name() {
-		return role_name;
-	}
-	public void setRole_name(String role_name) {
-		this.role_name = role_name;
-	}
-	public String getRole_mark() {
-		return role_mark;
-	}
-	public void setRole_mark(String role_mark) {
-		this.role_mark = role_mark;
-	}
-	public String getCreate_time() {
-		return create_time;
-	}
-	public void setCreate_time(String create_time) {
-		this.create_time = create_time;
-	}
-	public String getUpdate_time() {
-		return update_time;
-	}
-	public void setUpdate_time(String update_time) {
-		this.update_time = update_time;
-	}
+    private Integer id;
 
-	
-	public String getLast_user() {
-		return last_user;
-	}
-	public void setLast_user(String last_user) {
-		this.last_user = last_user;
-	}
-	public String getIs_enable() {
-		return is_enable;
-	}
-	public void setIs_enable(String is_enable) {
-		this.is_enable = is_enable;
-	}
-	
+    private String roleName;
+
+    private String roleMark;
+
+    private String permissionId;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    private String lastUser;
+
+    private String isEnable;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName == null ? null : roleName.trim();
+    }
+
+    public String getRoleMark() {
+        return roleMark;
+    }
+
+    public void setRoleMark(String roleMark) {
+        this.roleMark = roleMark == null ? null : roleMark.trim();
+    }
+
+    public String getPermissionId() {
+        return permissionId;
+    }
+
+    public void setPermissionId(String permissionId) {
+        this.permissionId = permissionId == null ? null : permissionId.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getLastUser() {
+        return lastUser;
+    }
+
+    public void setLastUser(String lastUser) {
+        this.lastUser = lastUser == null ? null : lastUser.trim();
+    }
+
+    public String getIsEnable() {
+        return isEnable;
+    }
+
+    public void setIsEnable(String isEnable) {
+        this.isEnable = isEnable == null ? null : isEnable.trim();
+    }
 }

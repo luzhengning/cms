@@ -7,7 +7,7 @@ import com.geek.cms.plugin.grid.splitPage.SplitPage;
  * @author luzhengning
  *
  */
-public class GridRequestModel {
+public class GridRequest {
 	//分页sql
 	private String limit;
 	//查询参数
@@ -17,17 +17,17 @@ public class GridRequestModel {
 	//条件
 	private String[] condition;
 	//或与
-	private String[] orWith;
+	private String orWith;
     //分页对象
 	private SplitPage splitPage;
 	//sql语句，最后生成的查询条件
 	private String paramsNameSql;
 	
 	
-	public String[] getOrWith() {
+	public String getOrWith() {
 		return orWith;
 	}
-	public void setOrWith(String[] orWith) {
+	public void setOrWith(String orWith) {
 		this.orWith = orWith;
 	}
 	public String getParamsNameSql() {

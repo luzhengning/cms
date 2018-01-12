@@ -45,44 +45,43 @@
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="panel-526586">
-					    
-						  <ul id="menu-list" >
-						  	<li>
-						  		<p>
-						  			<button type="button" class="btn btn-sm btn-default">Default</button>
-									<button type="button" class="btn btn-sm btn-primary">Primary</button>
-									<button type="button" class="btn btn-sm btn-success">Success</button>
-									<button type="button" class="btn btn-sm btn-info">Info</button>
-									<button type="button" class="btn btn-sm btn-warning">Warning</button>
-									<button type="button" class="btn btn-sm btn-danger">Danger</button>
-									<button type="button" class="btn btn-sm btn-link">Link</button>
+					<h3 style="margin-top:8;padding:0;font-family: 微软雅黑;">${title }</h3>
+					<hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3);margin-top: 10px;margin-bottom: 10px;" width="100%" color="#987cb9" size="3">
+					    	
+					    <div class="row">
+					    	<div class="col-md-5">
+					    		<p>
+					    			<button type="button" class="btn btn-sm">
+										<label style="margin:0px;"><input style="margin:0px;" type="checkbox" name="checkBoxAllBtn" onclick="checkBoxAll(this)">全选</label>
+									</button>
+						  			<button type="button" class="btn btn-sm btn-primary"><em class="glyphicon glyphicon-search"></em>&nbsp;查询全部</button>
+									<button type="button" class="btn btn-sm btn-success"><em class="glyphicon glyphicon-th-list"></em>&nbsp;多条件查询</button>
+									<button type="button" class="btn btn-sm btn-info"><em class="glyphicon glyphicon-plus"></em>&nbsp;新增</button>
+									<button type="button" class="btn btn-sm btn-warning"><em class="glyphicon glyphicon-refresh"></em>&nbsp;刷新</button>
 						  		</p>
-						  	</li>
-						  	<li>
-						  		<span class="form-group">
-									 <label for="exampleInputEmail1">Email address</label>
-									 <input type="email" class="form-control" id="exampleInputEmail1" style="display: -webkit-inline-box;"/>
+					    	</div>
+					    	<div class="col-md-3">
+					    			
+								<!-- <div class="form-group">
+									<select class="form-control input-sm">
+										<option value="">.input-sm1</option>
+										<option value="">.input-sm2</option>
+										<option value="">.input-sm3</option>
+										<option value="">.input-sm4</option>
+									</select>
+								</div> -->
+					    	</div>
+					    	<div class="col-md-2">
+								<button type="button" class="btn btn-sm btn-default"><em class="glyphicon glyphicon-print"></em>&nbsp;打印</button>
+								<button type="button" class="btn btn-sm btn-default"><em class="glyphicon glyphicon-log-out"></em>&nbsp;导出EXCEL</button>
+					    	</div>
+					    	<div class="col-md-2">
+						    	<span class="form-group" style="float:right;">
+									 <label for="exampleInputEmail1">全文搜索</label>
+									 <input type="email" class="form-control" id="exampleInputEmail1" placeholder="内容搜索" style="display: -webkit-inline-box;"/>
 								</span>
-						  	</li>
-						  	<li>
-						  		<div class="btn-group">
-									 <button class="btn btn-default">Action</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
-									<ul class="dropdown-menu">
-										<li>
-											 <a href="#">操作</a>
-										</li>
-										<li class="disabled">
-											 <a href="#">另一操作</a>
-										</li>
-										<li class="divider">
-										</li>
-										<li>
-											 <a href="#">其它</a>
-										</li>
-									</ul>
-								</div>
-						  	</li>
-						  </ul>
+					    	</div>
+					    </div>
 						<table class="table table-hover table-condensed table-striped table-bordered">
 				<thead>
 					<tr>
@@ -112,14 +111,11 @@
 							01/04/2012
 						</td>
 						<td>
-							<h6>
 								<span class="label label-default">Default</span>
 								<span class="label label-primary">Primary</span>
 								<span class="label label-success">Success</span>
 								<span class="label label-info">Info</span>
 								<span class="label label-warning">Warning</span>
-								<span class="label label-danger">Danger</span>
-							  </h6>
 						</td>
 					</tr>
 					<tr>
@@ -133,14 +129,12 @@
 							01/04/2012
 						</td>
 						<td>
-							<h6>
-								<span class="label label-default">Default</span>
-								<span class="label label-primary">Primary</span>
-								<span class="label label-success">Success</span>
-								<span class="label label-info">Info</span>
-								<span class="label label-warning">Warning</span>
-								<span class="label label-danger">Danger</span>
-							  </h6>
+							<span class="label label-default">Default</span>
+							<span class="label label-primary">Primary</span>
+							<span class="label label-success">Success</span>
+							<span class="label label-info">Info</span>
+							<span class="label label-warning">Warning</span>
+							<span class="label label-danger">Danger</span>
 						</td>
 					</tr>
 					<tr>
@@ -189,7 +183,7 @@
 			</table>
 						<ul class="pagination pagination-sm">
 							<li>
-								 <a href="#">Prev</a>
+								 <a href="#">上一页</a>
 							</li>
 							<li>
 								 <a href="#">1</a>
@@ -207,7 +201,7 @@
 								 <a href="#">5</a>
 							</li>
 							<li>
-								 <a href="#">Next</a>
+								 <a href="#">下一页</a>
 							</li>
 						</ul>
 					</div>
@@ -220,6 +214,6 @@
 			</div>
 		</div>
 </body>
-<script src="../static/js/jQuery/jquery-2.2.3.min.js"></script>
+<script src="../static/jQuery/jquery-2.2.4.min.js"></script>
 <script src="../static/bootstrap-3.3.7-dist//js/bootstrap.min.js" type="text/javascript"></script>
 </html>

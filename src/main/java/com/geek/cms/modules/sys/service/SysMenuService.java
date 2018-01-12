@@ -1,60 +1,70 @@
 package com.geek.cms.modules.sys.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.geek.cms.modules.sys.dao.SysMenuDao;
 import com.geek.cms.modules.sys.entity.SysMenu;
+import com.geek.cms.modules.sys.entity.SysMenu;
+import com.geek.cms.modules.sys.entity.example.PermissionsExample;
+import com.geek.cms.modules.sys.entity.example.SysMenuExample;
+import com.geek.cms.modules.sys.entity.example.SysMenuExample.Criteria;
+import com.geek.cms.modules.sys.entity.example.SysMenuExample.Criterion;
+import com.geek.cms.modules.sys.mapper.SysMenuMapper;
+import com.geek.cms.plugin.grid.splitGridReq.GridRequest;
+import com.geek.cms.utils.StringUtils;
 
 /**
  * 后台左侧菜单
  * @author 路正宁
  * @time:2017年10月13日 下午4:28:47
  */
+@Service
 public class SysMenuService extends SysMenuDao {
-
+	@Autowired
+	SysMenuMapper sysMenuMapper;
 	//父级id
 	private String ParentId="";
 
-	public SysMenuService() {
-		super(SysMenu.class);
-	}
 	
 	/**
 	 * 根据角色id查询菜单
-	 * @param roleId   传null忽略角色
+	 * @param sysMenuId   传null忽略角色
 	 * @param parentId 传0查询顶级节点
 	 * @param depthNum 查询深度，小于0查询全部
 	 * @return
 	 */
-	public List<SysMenu> findListByRoleId(Object roleId,Object parentId,int depthNum,HttpServletRequest request) {
-		String sql=querySql+"WHERE parent_id=? ORDER BY sort_num DESC";
-		//sql中的查询参数
-		Object[] params=null;
-		if(parentId!=null){
-			params=new Object[]{parentId};
-		}
+	public List<SysMenu> findListByRoleId(Object sysMenuId,String parentId,int depthNum,HttpServletRequest request) {
+		//String sql=querySql+"WHERE parent_id=? ORDER BY sort_num DESC";
+		SysMenuExample example=new SysMenuExample();
+		example.setOrderByClause("sort_num DESC");
+		example.or().andParentIdEqualTo(Integer.parseInt(parentId));
 		//父级
-		List<SysMenu> menu=super.find(sql, params);
+		List<SysMenu> menu=sysMenuMapper.selectByExample(example);
 		if(menu==null)return null;
 		for(int i=0;i<menu.size();i++){
+			System.out.println(menu.get(i).getName());
 			//根据角色筛选菜单
-			if(roleId!=null){
+			if(sysMenuId!=null){
 				//数据验证
-				if(menu.get(i).getRole_id()==null){
+				if(menu.get(i).getSysMenu_id()==null){
 					menu.remove(i);
 					i--;
 					continue;
 				}
 				//数据验证
-				if(menu.get(i).getRole_id().trim().length()==0){
+				if(menu.get(i).getSysMenu_id().trim().length()==0){
 					menu.remove(i);
 					i--;
 					continue;
 				}
 				//查询角色信息，如果没有就移除
-				if(!roleExits(roleId.toString(),menu.get(i).getRole_id().split(","))){
+				if(!sysMenuExits(sysMenuId.toString(),menu.get(i).getSysMenu_id().split(","))){
 					menu.remove(i);
 					i--;
 					continue;
@@ -78,7 +88,7 @@ public class SysMenuService extends SysMenuDao {
 				}
 			}
 			//查询子级
-			List<SysMenu> childMenu=findListByRoleId(roleId,menu.get(i).getId(),depthNum,request);
+			List<SysMenu> childMenu=findListByRoleId(sysMenuId,menu.get(i).getId().toString(),depthNum,request);
 			//添加子级
 			menu.get(i).setChildMenu(childMenu);
 		}
@@ -86,18 +96,111 @@ public class SysMenuService extends SysMenuDao {
 	}
 	/**
 	 * 查询角色是否存在
-	 * @param role 要查询的角色
-	 * @param roles 角色列表
+	 * @param sysMenu 要查询的角色
+	 * @param sysMenus 角色列表
 	 * @return
 	 */
-	public boolean roleExits(String role,String[] roles){
-		if(roles==null)return false;
-		for(String str:roles){
-			if(str.equals(role))return true;
+	public boolean sysMenuExits(String sysMenu,String[] sysMenus){
+		if(sysMenus==null)return false;
+		for(String str:sysMenus){
+			if(str.equals(sysMenu))return true;
 		}
 		return false;
 	}
 
+	
+	/**
+	 * 菜单查询计数器，用来计数等级节点
+	 * @param request
+	 * @return
+	 */
+	private int getDepthCount(HttpServletRequest request){
+		Object obj=request.getSession().getAttribute("depthCount");
+		String count=obj.toString();
+		return Integer.parseInt(count);
+	}
+	
+
+	@Override
+	public boolean add(SysMenu t) {
+		int result=sysMenuMapper.insert(t);
+		return isSuccess(result);
+	}
+
+	@Override
+	public boolean delete(String idkey) throws SQLException {
+		if(StringUtils.isBlank(idkey))return false;
+		int id=Integer.parseInt(idkey);
+		int result=sysMenuMapper.deleteByPrimaryKey(id);
+		return isSuccess(result);
+	}
+
+	@Override
+	public boolean delete(SysMenuExample example) throws SQLException {
+		int result=sysMenuMapper.deleteByExample(example);
+		return isSuccess(result);
+	}
+
+	@Override
+	public boolean update(SysMenu t) {
+		int result=sysMenuMapper.updateByPrimaryKey(t);
+		return isSuccess(result);
+	}
+
+	@Override
+	public SysMenu load(String id) {
+		if(StringUtils.isBlank(id))return null;
+		int key=Integer.parseInt(id);
+		return sysMenuMapper.selectByPrimaryKey(key);
+	}
+
+	@Override
+	public List<SysMenu> findList(GridRequest model) {
+		return sysMenuMapper.selectByExample(paramsToExample(model));
+	}
+	@Override
+	public List<SysMenu> findList(SysMenuExample example) {
+		return sysMenuMapper.selectByExample(example);
+	}
+
+	@Override
+	public int maximum(GridRequest model) {
+		return sysMenuMapper.countByExample(paramsToExample(model));
+	}
+
+	@Override
+	public int maximum(SysMenuExample example) {
+		return sysMenuMapper.countByExample(example);
+	}
+	
+	private boolean isSuccess(int result) {
+		if(result>0)return true;
+		return false;
+	}
+	public SysMenuExample paramsToExample(GridRequest model) {
+		SysMenuExample example=new SysMenuExample();
+		if(model==null)return example;
+		example.setPage(model.getSplitPage());
+		//查询的字段，与查询参数对应
+		String[] paramsName=model.getParamsName();
+		//条件
+		String[] condition=model.getCondition();
+		//或与
+		String orWith=model.getOrWith();
+		//参数
+		Object[] params=model.getParams();
+		if(paramsName==null||condition==null||orWith==null||params==null)return example;
+		Criteria criteria1 = example.createCriteria();
+		for(int i=0;i<paramsName.length;i++) {
+			if("or".equals(orWith)) {
+				example.or().criteria.add(new Criterion(paramsName[i]+" "+condition[i]+" ",params[i]));
+				continue;
+			}
+			criteria1.criteria.add(new Criterion(paramsName[i]+" "+condition[i]+" ",params[i]));
+		}
+		
+		return example;
+	}
 	/**
 	 * 设置查询的父节点
 	 * @param parentId
@@ -115,23 +218,10 @@ public class SysMenuService extends SysMenuDao {
 	private void setDepthCount(int depthCount,HttpServletRequest request){
 		request.getSession().setAttribute("depthCount",depthCount);
 	}
-	/**
-	 * 菜单查询计数器，用来计数等级节点
-	 * @param request
-	 * @return
-	 */
-	private int getDepthCount(HttpServletRequest request){
-		Object obj=request.getSession().getAttribute("depthCount");
-		String count=obj.toString();
-		return Integer.parseInt(count);
-	}
-	private void setParentId(String ParentId,HttpServletRequest request){
+	public void setParentId(String ParentId,HttpServletRequest request){
 		request.getSession().setAttribute("ParentId",ParentId);
 	}
 	private String getParentId(HttpServletRequest request){
 		return request.getSession().getAttribute("ParentId").toString();
 	}
-
-	
-
 }

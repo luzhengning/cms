@@ -138,7 +138,7 @@
 			<!-- Tab panes -->
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane active" id="Section11">
-					<iframe src="<%=request.getContextPath() %>/admin/test"
+					<iframe src="<%=request.getContextPath() %>/sysmenu/grid"
 						width="100%" height="100%" frameborder="0"></iframe>
 				</div>
 			</div>

@@ -8,7 +8,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import com.geek.cms.core.database.AssemblySql;
 import com.geek.cms.modules.cms.dao.CmsProductDao;
 import com.geek.cms.modules.core.service.BusService;
-import com.geek.cms.utils.StringUtil;
+import com.geek.cms.utils.StringUtils;
 
 public class test {
 

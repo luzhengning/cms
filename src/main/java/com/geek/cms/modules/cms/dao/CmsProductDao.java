@@ -2,7 +2,7 @@ package com.geek.cms.modules.cms.dao;
 
 import com.geek.cms.modules.cms.entity.CmsContent;
 import com.geek.cms.modules.core.service.BusService;
-import com.geek.cms.modules.sys.entity.Permission;
+import com.geek.cms.modules.sys.entity.Permissions;
 
 public interface CmsProductDao {
 	public void insert();

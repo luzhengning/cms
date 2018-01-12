@@ -2,7 +2,7 @@ package com.geek.cms.utils;
 
 import java.util.List;
 
-public class StringUtil {
+public class StringUtils {
 	
 	/**
 	 * 通过指定字符连接String数组
@@ -69,4 +69,24 @@ public class StringUtil {
 		}
 		return sb.substring(0, sb.length()-1).toString();
 	}
+	/**
+	 * 一次性判断多个或单个对象为空。
+	 * @param objects
+	 * @author zhou-baicheng
+	 * @return 只要有一个元素为Blank，则返回true
+	 */
+	public static boolean isBlank(Object...objects){
+		Boolean result = false ;
+		for (Object object : objects) {
+			if(null == object || "".equals(object.toString().trim()) 
+					|| "null".equals(object.toString().trim())){
+				result = true ; 
+				break ; 
+			}
+		}
+		return result ; 
+	}
+	public static String trim(String str) {
+        return str == null ? null : str.trim();
+    }
 }

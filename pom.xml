@@ -10,7 +10,10 @@
 	<properties>
 		<!-- spring版本号 -->
 		<spring.version>4.3.10.RELEASE</spring.version>
+		 <!-- mybatis版本号 -->
+        <mybatis.version>3.2.8</mybatis.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -139,8 +142,35 @@
 			<artifactId>ehcache</artifactId>
 			<version>2.8.2</version>
 		</dependency>
+		<!--mybatis依赖 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
 
-
+        <!-- mybatis/spring包 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.18</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+		<dependency>
+		    <groupId>log4j</groupId>
+		    <artifactId>log4j</artifactId>
+		    <version>1.2.17</version>
+		</dependency>
+		<dependency>
+             <groupId>org.mybatis.generator</groupId>
+             <artifactId>mybatis-generator-core</artifactId>
+             <version>1.3.2</version>
+         </dependency>
 
 
 
@@ -148,5 +178,35 @@
 	</dependencies>
 	<build>
 		<finalName>cms</finalName>
-	</build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                    </configuration>
+                    <version>3.3</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.mybatis.generator</groupId>
+                    <artifactId>mybatis-generator-maven-plugin</artifactId>
+                    <version>1.3.2</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>mysql</groupId>
+                            <artifactId>mysql-connector-java</artifactId>
+                            <version>5.1.35</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                         <!--配置文件的路径-->
+                         <configurationFile>C:\Users\Administrator\git\cms\src\main\resources\generatorConfig.xml</configurationFile> 
+                        <overwrite>true</overwrite>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

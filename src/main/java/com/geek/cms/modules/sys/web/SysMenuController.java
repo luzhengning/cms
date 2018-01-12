@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.session.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller; 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.geek.cms.modules.sys.dao.SysMenuDao;
 import com.geek.cms.modules.sys.entity.SysMenu;
 import com.geek.cms.modules.sys.service.SysMenuService;
 import com.geek.cms.plugin.uiBsTree.BsTreeUtil;
@@ -30,8 +32,14 @@ import com.sdicons.json.mapper.MapperException;
 @Controller
 @RequestMapping("/sysmenu")
 public class SysMenuController {
-	SysMenuService service=new SysMenuService();
 	
+	@Autowired
+	SysMenuDao sysMenudao;
+	@RequestMapping("/grid")
+	public ModelAndView test(HttpServletRequest request, HttpServletResponse response) throws MapperException{
+		
+		return new ModelAndView("/UiPlugin/BSTree");
+	}
 	/**
 	 * 查询系统菜单 
 	 * @param roleId 角色id
@@ -44,8 +52,8 @@ public class SysMenuController {
 		//获取查询数据
 		Map<String,String> param=getRequestParam(request);
 		//设置该节点
-		service.setParentId(param.get("parentId"),request);
-		List<SysMenu> sysMenu=service.findListByRoleId(param.get("roleId"),param.get("parentId"),Integer.parseInt(param.get("depthNum")),request);
+		sysMenudao.setParentId(param.get("parentId"),request);
+		List<SysMenu> sysMenu=sysMenudao.findListByRoleId(param.get("roleId"),param.get("parentId"),Integer.parseInt(param.get("depthNum")),request);
 		PrintWriter out=null;
 		try {
 			response.setCharacterEncoding("UTF-8");
@@ -72,8 +80,8 @@ public class SysMenuController {
 	        HttpServletResponse response) throws MapperException, IOException{
 		//获取查询数据
 		Map<String,String> param=getRequestParam(request);
-		service.setParentId(param.get("parentId"),request);
-		List<SysMenu> sysMenu=service.findListByRoleId(param.get("roleId"),param.get("parentId"),Integer.parseInt(param.get("depthNum")),request);
+		sysMenudao.setParentId(param.get("parentId"),request);
+		List<SysMenu> sysMenu=sysMenudao.findListByRoleId(param.get("roleId"),param.get("parentId"),Integer.parseInt(param.get("depthNum")),request);
 		BsTreeUtil util=new BsTreeUtil();
 		Map<String,Object> data = new HashMap<String,Object>(); 
 		String text=JsonUtil.objectToJsonStr(util.SysMenuToBTreeJson(sysMenu));

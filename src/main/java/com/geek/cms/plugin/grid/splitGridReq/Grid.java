@@ -13,7 +13,7 @@ import com.sdicons.json.mapper.MapperException;
  * 初始化表格
  * @author 路正宁
  */
-public class InitGrid {
+public class Grid {
 	//表格标题
 	private String title;
 	//表格数据加载路径
@@ -25,7 +25,7 @@ public class InitGrid {
 	//分页json
 	private String pageJsonData;
 	//表格列标题
-	private List<GridColumnModel> gridColumn;
+	private List<GridColumn> gridColumn;
 	//分页对象
 	private SplitPage page;
 	
@@ -47,10 +47,10 @@ public class InitGrid {
 	public void setPageJsonData(String pageJsonData) {
 		this.pageJsonData = pageJsonData;
 	}
-	public List<GridColumnModel> getGridColumn() {
+	public List<GridColumn> getGridColumn() {
 		return gridColumn;
 	}
-	public void setGridColumn(List<GridColumnModel> gridColumn) {
+	public void setGridColumn(List<GridColumn> gridColumn) {
 		this.gridColumn = gridColumn;
 	}
 	public SplitPage getPage() {
@@ -72,7 +72,7 @@ public class InitGrid {
 	public void setDeleteUrl(String deleteUrl) {
 		this.deleteUrl = deleteUrl;
 	}
-	public Map<String, Object> getModel(InitGrid grid) throws MapperException{
+	public Map<String, Object> getModel(Grid grid) throws MapperException{
 		Map<String, Object> model=new HashMap<String, Object>();
 		//头名称
 		model.put("title", grid.getTitle());

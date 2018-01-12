@@ -7,8 +7,7 @@
 			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
-
-
+	<context:component-scan base-package="com.geek.cms.modules"/>
 	<!-- Realm实现 -->
 	<bean id="myRealm" class="com.geek.cms.core.shiro.token.AuthorizationRealm"></bean>
 	<!-- 安全管理器 -->

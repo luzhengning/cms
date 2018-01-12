@@ -9,7 +9,7 @@ import com.geek.cms.plugin.grid.splitPage.SplitPage;
 
 public class SplitGridRequestUtil {
 	//页面分页处理
-	public static <T> SplitPage getSplitPage(GridRequestModel model,BusServiceDao<T> dao, HttpServletRequest request){
+	public static <T,E> SplitPage getSplitPage(GridRequest model,BusServiceDao<T,E> dao, HttpServletRequest request){
 		SplitPage splitPage=null;
 		String limit="";
 		String flag=request.getParameter("pageNo");
@@ -55,8 +55,8 @@ public class SplitGridRequestUtil {
 	 * @param dao
 	 * @return
 	 */
-	public static <T> GridRequestModel getModel(HttpServletRequest request,BusServiceDao<T> dao){
-		GridRequestModel model=new GridRequestModel();
+	public static <T,E> GridRequest getModel(HttpServletRequest request,BusServiceDao<T,E> dao){
+		GridRequest model=new GridRequest();
 		//字段值
 		model.setParams(SplitGridRequestUtil.getReqeustParams(request));
 		//字段名
@@ -64,7 +64,7 @@ public class SplitGridRequestUtil {
 		//条件
 		model.setCondition(request.getParameterValues("condition"));
 		//与或
-		model.setOrWith(request.getParameterValues("searchOrWith"));
+		model.setOrWith(request.getParameter("searchOrWith"));
 		//生成查询条件
 		model.setParamsNameSql(MapToQuerySql(model));
 		//分页
@@ -80,8 +80,8 @@ public class SplitGridRequestUtil {
 	 * @param paramsName
 	 * @return
 	 */
-	public static String MapToQuerySql(GridRequestModel model){
-		if(model==null)return "";
+	public static String MapToQuerySql(GridRequest model){
+		/*if(model==null)return "";
 		if(model.getParams()==null)return "";
 		String sql="";
 		if(model.getParamsName()!=null){
@@ -91,6 +91,7 @@ public class SplitGridRequestUtil {
 				sql=(sql+model.getParamsName()[i]+" "+model.getCondition()[i]+" ? "+model.getOrWith()[i]+" ");
 			}
 		}
-		return sql;
+		return sql;*/
+		return null;
 	}
 }

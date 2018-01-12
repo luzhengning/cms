@@ -30,13 +30,14 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.geek.cms.modules.sys.entity.Permission;
+import com.geek.cms.modules.sys.entity.Permissions;
 import com.geek.cms.modules.sys.entity.Role;
 import com.geek.cms.modules.sys.entity.User;
+import com.geek.cms.modules.sys.entity.example.UserExample;
 import com.geek.cms.modules.sys.service.PermissionService;
 import com.geek.cms.modules.sys.service.RoleService;
 import com.geek.cms.modules.sys.service.UserService;
-import com.geek.cms.utils.StringUtil;
+import com.geek.cms.utils.StringUtils;
 
 
 /**
@@ -61,33 +62,33 @@ public class AuthorizationRealm extends AuthorizingRealm {
 		RoleService roleService=new RoleService();
 		PermissionService permissionService=new PermissionService();
 		//获取用户角色Id 
-		String[] roleIds=StringUtil.strToArray(user.getRole_id(),",");
+		String[] roleIds=StringUtils.strToArray(user.getRoleId(),",");
 		//查询用户角色
 		List<Role> roleList=roleService.findByIds(roleIds);
 		if (roleList != null) {
 			//提取角色名称
 			Set<String> roleNames = new HashSet<String>();
 	        for (Role role : roleList) {
-	            roleNames.add(role.getRole_name());
-	            System.out.println("角色："+role.getRole_name());
+	            roleNames.add(role.getRoleName());
+	            System.out.println("角色："+role.getRoleName());
 	        }
 	        // 将角色名称提供给info
 	        authorizationInfo.setRoles(roleNames);
 	        //设置权限
-            List<Permission> permissionList=new ArrayList<Permission>();
+            List<Permissions> permissionList=new ArrayList<Permissions>();
             String[] permissionIds=null;
             for(int i=0;i<roleList.size();i++) {
-            	permissionIds=StringUtil.strToArray(roleList.get(i).getPermission_id(), ",");
+            	permissionIds=StringUtils.strToArray(roleList.get(i).getPermissionId(), ",");
             	//查询权限
-            	List<Permission> plist=permissionService.findByIds(permissionIds);
+            	List<Permissions> plist=permissionService.findByIds(permissionIds);
             	if(plist==null)continue;
             	permissionList.addAll(plist);
             }
             //添加角色
             Set<String> permissionNames = new HashSet<String>(); 
-            for (Permission permission : permissionList) {
-                permissionNames.add(permission.getPermission_name());
-                System.out.println("权限:"+permission.getPermission_name());
+            for (Permissions permission : permissionList) {
+                permissionNames.add(permission.getPermissionName());
+                System.out.println("权限:"+permission.getPermissionName());
             }
             // 将权限名称提供给info
             authorizationInfo.setStringPermissions(permissionNames);
@@ -114,13 +115,15 @@ public class AuthorizationRealm extends AuthorizingRealm {
         	//登录成功
         	return new SimpleAuthenticationInfo(user, password, getName());  
         }
-        if(userService.findList(new String[] {"account"}, new Object[]{account},"AND").size()==0)
+        UserExample example=new UserExample();
+        example.or().andAccountEqualTo(user.getAccount());
+        if(userService.findList(example)==null)
         {
         	throw new UnknownAccountException(); //如果用户名错误
         }else
         {
         	throw new IncorrectCredentialsException(); //如果密码错误  
-        }  
+        }
         
 	}
 	/**

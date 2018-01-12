@@ -26,10 +26,12 @@ public class EnterController {
 	public ModelAndView administrators(){
 		return new ModelAndView("/Admin/Administrators");
 	}
-	@RequestMapping("/test")
-	public ModelAndView test(HttpServletRequest request, HttpServletResponse response) throws MapperException{
-		SysMenuService service=new SysMenuService();
-		
-		return new ModelAndView("/UiPlugin/BSTree");
+	/**
+	 * 管理员页面
+	 * @return
+	 */
+	@RequestMapping("/admin")
+	public ModelAndView admin(){
+		return new ModelAndView("/Admin/Admin");
 	}
 }

@@ -20,7 +20,14 @@ public class SplitPage {
     
     public String limit="";
     
-    private String pageNo;
+    public String getLimit() {
+		return limit;
+	}
+
+	public void setLimit(String limit) {
+		this.limit = limit;
+	}
+	private String pageNo;
     
     
     public String getPageNo() {

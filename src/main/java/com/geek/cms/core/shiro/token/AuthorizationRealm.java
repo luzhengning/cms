@@ -30,6 +30,9 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import com.geek.cms.modules.sys.dao.PermissionsDao;
+import com.geek.cms.modules.sys.dao.RoleDao;
+import com.geek.cms.modules.sys.dao.UserDao;
 import com.geek.cms.modules.sys.entity.Permissions;
 import com.geek.cms.modules.sys.entity.Role;
 import com.geek.cms.modules.sys.entity.User;
@@ -46,8 +49,12 @@ import com.geek.cms.utils.StringUtils;
  * @time:2017年10月13日 下午3:26:28
  */
 public class AuthorizationRealm extends AuthorizingRealm {
-	private UserService userService=new UserService();
-	
+	@Autowired
+	private UserDao userService=null;
+	@Autowired
+	private RoleDao roleService=null;
+	@Autowired
+	private PermissionsDao permissionService=null;
 	/**
 	 * 验证角色权限信息
 	 */
@@ -59,8 +66,6 @@ public class AuthorizationRealm extends AuthorizingRealm {
 		User user=(User)(SecurityUtils.getSubject().getPrincipal());
 		if(user==null)return null;
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-		RoleService roleService=new RoleService();
-		PermissionService permissionService=new PermissionService();
 		//获取用户角色Id 
 		String[] roleIds=StringUtils.strToArray(user.getRoleId(),",");
 		//查询用户角色

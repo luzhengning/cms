@@ -202,7 +202,7 @@
                     </dependencies>
                     <configuration>
                          <!--配置文件的路径-->
-                         <configurationFile>C:\Users\Administrator\git\cms\src\main\resources\generatorConfig.xml</configurationFile> 
+                         <configurationFile>F:\WebProject\cms\src\main\resources\generatorConfig.xml</configurationFile> 
                         <overwrite>true</overwrite>
                     </configuration>
                 </plugin>

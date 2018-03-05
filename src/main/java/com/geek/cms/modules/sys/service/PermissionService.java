@@ -32,12 +32,12 @@ public class PermissionService extends PermissionsDao {
 	 */
 	@Override
 	public List<Permissions> findByIds(String[] ids) {
+		if(ids==null)return null;
 		PermissionsExample example=new PermissionsExample();
 		example.or().andIdIn(Converts.ArrayToListInteger(ids));
 		List<Permissions> result=permissionsMapper.selectByExample(example);
 		return result;
 	}
-
 	@Override
 	public boolean add(Permissions t) {
 		int result=permissionsMapper.insert(t);

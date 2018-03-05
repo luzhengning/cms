@@ -68,11 +68,9 @@ public class UserService extends UserDao {
 	public User load(String id) {
 		if(StringUtils.isBlank(id))return null;
 		int key=Integer.parseInt(id);
-		UserExample example=new UserExample();
-		example.or().andIdEqualTo(key);
-		List<User> list=userMapper.selectByExample(example);
+		User list=userMapper.selectByPrimaryKey(key);
 		if(list!=null)
-			if(list.size()>0)return list.get(0);
+			return list;
 		return null;
 	}
 
@@ -84,7 +82,6 @@ public class UserService extends UserDao {
 	public List<User> findList(UserExample example) {
 		return userMapper.selectByExample(example);
 	}
-
 	@Override
 	public int maximum(GridRequest model) {
 		return userMapper.countByExample(paramsToExample(model));

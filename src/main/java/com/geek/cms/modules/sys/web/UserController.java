@@ -21,12 +21,14 @@ import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import com.geek.cms.modules.sys.dao.UserDao;
 import com.geek.cms.modules.sys.entity.User;
 import com.geek.cms.modules.sys.service.UserService;
 
@@ -38,7 +40,8 @@ import com.geek.cms.modules.sys.service.UserService;
 @RequestMapping("/user")
 public class UserController {
 
-	private UserService userService = new UserService();
+	@Autowired
+	private UserDao userService;
 
 	// 跳转到登录页面
 	@RequestMapping("/toLoginJsp")
@@ -115,9 +118,9 @@ public class UserController {
 
 	@RequestMapping("/get")
 	//属于user或者admin之一;修改logical为OR 即可
-	@RequiresRoles(value={"user","13242"},logical=Logical.AND)
+	//@RequiresRoles(value={"user","13242"},logical=Logical.AND)
 	public void get() {
-		//userService.update(null, "");
+		User user=userService.load("1");
 	}
 
 }

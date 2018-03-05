@@ -19,7 +19,6 @@
             </jdbcConnection>
 
         <javaModelGenerator targetPackage="com.geek.cms.modules.sys.entity"
-<<<<<<< HEAD
                             targetProject="F:\WebProject\cms\src\main\java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
@@ -35,35 +34,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <!--<table tableName="T_FEE_AGTBILL" domainObjectName="FeeAgentBill"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false"/>-->
-
-        <table tableName="sys_user" domainObjectName="User"
-=======
-                            targetProject="C:\Users\Administrator\git\cms\src\main\java\com\geek\cms\test\entity">
-            <property name="enableSubPackages" value="true"/>
-            <property name="trimStrings" value="true"/>
-        </javaModelGenerator>
-
-        <sqlMapGenerator targetPackage="com.geek.cms.modules.sys.xml"
-                         targetProject="C:\Users\Administrator\git\cms\src\main\java\com\geek\cms\test\xml">
-            <property name="enableSubPackages" value="true"/>
-        </sqlMapGenerator>
-
-        <javaClientGenerator targetPackage="com.geek.cms.modules.sys.mapper"
-                             targetProject="C:\Users\Administrator\git\cms\src\main\java\com\geek\cms\test\mapper" type="XMLMAPPER">
-            <property name="enableSubPackages" value="true"/>
-        </javaClientGenerator>
-
-        <!--<table tableName="T_FEE_AGTBILL" domainObjectName="FeeAgentBill"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false"/>-->
-
-        <table tableName="sys_tree_menu" domainObjectName="SysMenu"
->>>>>>> refs/remotes/origin/master
+        <table tableName="table" domainObjectName="Table"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">

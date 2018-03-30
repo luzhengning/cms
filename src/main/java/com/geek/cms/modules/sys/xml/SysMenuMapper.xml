@@ -7,8 +7,8 @@
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
     <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="sort_num" property="sortNum" jdbcType="INTEGER" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
     <result column="role_id" property="roleId" jdbcType="VARCHAR" />
     <result column="index_select" property="indexSelect" jdbcType="VARCHAR" />
     <result column="create_by" property="createBy" jdbcType="VARCHAR" />
@@ -116,8 +116,8 @@
       update_time, role_id, index_select, 
       create_by, is_enable)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
-      #{url,jdbcType=VARCHAR}, #{sortNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{roleId,jdbcType=VARCHAR}, #{indexSelect,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{sortNum,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{indexSelect,jdbcType=VARCHAR}, 
       #{createBy,jdbcType=VARCHAR}, #{isEnable,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.geek.cms.modules.sys.entity.SysMenu" >
@@ -174,10 +174,10 @@
         #{sortNum,jdbcType=INTEGER},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=VARCHAR},
       </if>
       <if test="roleId != null" >
         #{roleId,jdbcType=VARCHAR},
@@ -218,10 +218,10 @@
         sort_num = #{record.sortNum,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null" >
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        create_time = #{record.createTime,jdbcType=VARCHAR},
       </if>
       <if test="record.updateTime != null" >
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=VARCHAR},
       </if>
       <if test="record.roleId != null" >
         role_id = #{record.roleId,jdbcType=VARCHAR},
@@ -247,8 +247,8 @@
       parent_id = #{record.parentId,jdbcType=INTEGER},
       url = #{record.url,jdbcType=VARCHAR},
       sort_num = #{record.sortNum,jdbcType=INTEGER},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=VARCHAR},
       role_id = #{record.roleId,jdbcType=VARCHAR},
       index_select = #{record.indexSelect,jdbcType=VARCHAR},
       create_by = #{record.createBy,jdbcType=VARCHAR},
@@ -273,10 +273,10 @@
         sort_num = #{sortNum,jdbcType=INTEGER},
       </if>
       <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+        create_time = #{createTime,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=VARCHAR},
       </if>
       <if test="roleId != null" >
         role_id = #{roleId,jdbcType=VARCHAR},
@@ -299,8 +299,8 @@
       parent_id = #{parentId,jdbcType=INTEGER},
       url = #{url,jdbcType=VARCHAR},
       sort_num = #{sortNum,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
       role_id = #{roleId,jdbcType=VARCHAR},
       index_select = #{indexSelect,jdbcType=VARCHAR},
       create_by = #{createBy,jdbcType=VARCHAR},

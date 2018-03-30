@@ -18,12 +18,13 @@
 <link title="orange"
 	href="../static/admin/aliyunAdmin/css/dermaorange.css" rel="stylesheet"
 	type="text/css" disabled="disabled" />
-<script src="../static/jQuery/jquery-1.11.1.min.js"
+<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"
 	type="text/javascript"></script>
 <script src="../static/admin/aliyunAdmin/script/jquery.cookie.js"
 	type="text/javascript"></script>
 <script src="../static/bootstrap-3.3.7-dist/js/bootstrap.min.js"
 	type="text/javascript"></script>
+
 
 <style>
 #tab-header li a {
@@ -146,9 +147,8 @@
 		</div>
 	</div>
 
-	<script type="text/javascript">
-	
-	</script>
+	<script src="../static/main/webJs/SysMenuJs.js" type="text/javascript"></script>
+	<script src="../static/main/webJs/JsonUtil.js" type="text/javascript"></script>
 	<script type="text/javascript">
 $(function(){
 /*换肤*/
@@ -197,21 +197,16 @@ $(".left-main .sidebar-fold").click(function(){
 	<script type="text/javascript">
 		//初始化
 	    init();
-	    var data=null;
-		//查询菜单列表
-		function loadMenuData(parentId,depthNum){
-			data=null;
-			$.ajax({
-	    		url:'<%=request.getContextPath() %>/sysmenu/load',
-	    		data:{"parentId":parentId,"depthNum":depthNum},
-	    		async: false,//禁止异步查询
-	    		success:function(resultData){
-	    			data=resultData;
-	    		},
-	    		error:function(data){
-					alert("error");
-				}
-	    	});
+		function jsonFormat(dataJson,dialog){
+			var data=new Array();
+			$.each(JSON.parse(dataJson),function(i, field){ 
+				if(i=='code')data[0]=field;
+				if(i=='msg')data[1]=field;
+				if(i=='ex')data[2]=field;
+				if(i=='data')data[3]=field;
+			});
+			if(dialog==true)alert(data[1]);
+			return data;
 		}
 		//设置顶部站点与服务菜单列表
 		function setSiteMenu(dataJson){
@@ -219,7 +214,7 @@ $(".left-main .sidebar-fold").click(function(){
 			var doc1="";
 			var doc2="";
 			var doc3="";
-			$.each(JSON.parse(dataJson), function(i, field){ 
+			$.each(JSON.parse(dataJson),function(i, field){ 
 				doc1="<div class='topbar-nav-col'>";
                 doc2+="<div class=''><p class='topbar-nav-item-title'>"+field.name+"</p><ul>"+setSiteChild(field.childMenu)+"</ul></div>";
                 //alert((i%2));
@@ -251,23 +246,25 @@ $(".left-main .sidebar-fold").click(function(){
 		//初始化
 		function init(){
 			//初始化站点列表
-			loadMenuData("0","2");
+			var menedata=SysMenuloadMenuData(null,"0","2",'<%=request.getContextPath() %>');
+			var datas=jsonFormat(menedata,false);
 			//显示站点列表
-			setSiteMenu(data);
+			setSiteMenu(datas[3]);
 			//重新设置左侧菜单的单击显示隐藏事件
 			setSubNavShowHide();
 		}
 		//站点列表点击事件
 		function openChrild(parentid){
-			loadMenuData(parentid,2);
-			setLeftTreeMenu();
+			var menedata=SysMenuloadMenuData(null,parentid,2,'<%=request.getContextPath() %>');
+			var datas=jsonFormat(menedata,false);
+			setLeftTreeMenu(datas[3]);
 		}
 		//设置左侧菜单列表
-		function setLeftTreeMenu(){
+		function setLeftTreeMenu(menedata){
 			$(".subNavBox").empty();
-			$.each(JSON.parse(data),function(j,fielld){
+			$.each(JSON.parse(menedata),function(j,fielld){
 				var menu1="<div class='sBox'>"
-			        +"<div class='subNav sublist-up'><span class='title-icon glyphicon glyphicon-chevron-up'></span><span class='sublist-title'>"+fielld.name+"</span></div>"
+			        +"<div class='subNav sublist-up'><span class='title-icon glyphicon glyphicon-chevron-up'></span><span class='sublist-title' style='font-size:14px;'>"+fielld.name+"</span></div>"
 			        +"<ul class='navContent' style='display:none'>";
 			        var menu2=setLeftTreeMenuChirld(fielld.childMenu);
 			        var menu3="</ul></div>";
@@ -283,7 +280,7 @@ $(".left-main .sidebar-fold").click(function(){
 			var doc="";
 			$.each(menuChrild,function(j,fielld){
 				doc+="<li class=''>"
-				        +"<a href='#'  id='"+fielld.id+"' name='"+fielld.url+"'><span class='sublist-icon glyphicon glyphicon-user'></span><span class='sub-title'>"+fielld.name+"</span></a>" 
+				        +"<a href='#'  id='"+fielld.id+"' name='"+fielld.url+"'><span class='sublist-icon glyphicon glyphicon-user'></span><span class='sub-title' style='font-size:12px;'>"+fielld.name+"</span></a>" 
 		        	+"</li>";
 			});
 			return doc;

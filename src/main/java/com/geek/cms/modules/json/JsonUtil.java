@@ -1,4 +1,4 @@
-package com.geek.cms.utils;
+package com.geek.cms.modules.json;
 
 import java.io.StringReader;  
 import java.lang.reflect.Field;  
@@ -23,8 +23,13 @@ public class JsonUtil {
      * @return 
      * @throws MapperException 
      */   
-    public static String objectToJsonStr(Object obj) throws MapperException{  
-        JSONValue jsonValue = JSONMapper.toJSON(obj);    
+    public static String objectToJsonStr(Object obj){  
+        JSONValue jsonValue=null;
+		try {
+			jsonValue = JSONMapper.toJSON(obj);
+		} catch (MapperException e) {
+			e.printStackTrace();
+		}    
         String jsonStr = jsonValue.render(false);  
         return jsonStr;  
     }  

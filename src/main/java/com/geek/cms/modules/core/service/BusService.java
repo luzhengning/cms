@@ -9,9 +9,9 @@ import org.apache.commons.lang3.ArrayUtils;
 import com.geek.cms.core.database.AssemblySql;
 import com.geek.cms.modules.sys.entity.Permissions;
 import com.geek.cms.modules.sys.entity.example.PermissionsExample;
-import com.geek.cms.plugin.grid.splitGridReq.GridColumn;
-import com.geek.cms.plugin.grid.splitGridReq.GridRequest;
-import com.geek.cms.plugin.grid.splitGridReq.SplitGridRequestUtil;
+import com.geek.cms.plugin.grid.gridReq.GridColumn;
+import com.geek.cms.plugin.grid.gridReq.GridRequest;
+import com.geek.cms.plugin.grid.gridReq.SplitGridRequestUtil;
 import com.geek.cms.utils.SqlUtil;
 import com.geek.cms.utils.db.DbUtil;
 

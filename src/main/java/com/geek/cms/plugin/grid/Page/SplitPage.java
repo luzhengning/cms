@@ -1,4 +1,4 @@
-package com.geek.cms.plugin.grid.splitPage;
+package com.geek.cms.plugin.grid.Page;
 /**
  *  分页对象,进行一系列分页操作 
  *  MYSQL数据库

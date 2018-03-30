@@ -3,8 +3,8 @@ package com.geek.cms.core.database;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.geek.cms.plugin.grid.splitGridReq.GridColumn;
-import com.geek.cms.utils.StringUtils;
+import com.geek.cms.plugin.grid.gridReq.GridColumn;
+import com.geek.cms.utils.StringUtil;
 /**
  * 组装Sql，该类在BusService类中调用
  * @author luzhengning
@@ -23,9 +23,9 @@ public class AssemblySql {
 		StringBuilder sql=new StringBuilder();
 		sql.append("INSERT INTO ");
 		//list转string[]
-		String[] columns=StringUtils.ListToArray(GridColumn.gridColumnToListString(columnNames));
-		sql.append(tableName+"("+StringUtils.arrayToStr(columns, ",")+") ");
-		sql.append("Values("+StringUtils.connCharToString("?", ",",columnNames.size())+") ");
+		String[] columns=StringUtil.ListToArray(GridColumn.gridColumnToListString(columnNames));
+		sql.append(tableName+"("+StringUtil.arrayToStr(columns, ",")+") ");
+		sql.append("Values("+StringUtil.connCharToString("?", ",",columnNames.size())+") ");
 		return sql.toString();
 	}
 	/**
@@ -47,7 +47,7 @@ public class AssemblySql {
 		sb.append("Update ");
 		sb.append(tableName);
 		sb.append(" Set ");
-		sb.append(StringUtils.connListToString(GridColumn.gridColumnToListString(columnNames), "=?,"));
+		sb.append(StringUtil.connListToString(GridColumn.gridColumnToListString(columnNames), "=?,"));
 		sb.append(" Where id=?");
 		return sb.toString();
 	}

@@ -16,8 +16,8 @@ import com.geek.cms.modules.sys.entity.example.SysMenuExample;
 import com.geek.cms.modules.sys.entity.example.SysMenuExample.Criteria;
 import com.geek.cms.modules.sys.entity.example.SysMenuExample.Criterion;
 import com.geek.cms.modules.sys.mapper.SysMenuMapper;
-import com.geek.cms.plugin.grid.splitGridReq.GridRequest;
-import com.geek.cms.utils.StringUtils;
+import com.geek.cms.plugin.grid.gridReq.GridRequest;
+import com.geek.cms.utils.StringUtil;
 
 /**
  * 后台左侧菜单
@@ -29,7 +29,7 @@ public class SysMenuService extends SysMenuDao {
 	@Autowired
 	SysMenuMapper sysMenuMapper;
 	//父级id
-	private String ParentId="";
+	private String ParentIds="";
 
 	
 	/**
@@ -52,19 +52,19 @@ public class SysMenuService extends SysMenuDao {
 			//根据角色筛选菜单
 			if(sysMenuId!=null){
 				//数据验证
-				if(menu.get(i).getSysMenu_id()==null){
+				if(menu.get(i).getRoleId()==null){
 					menu.remove(i);
 					i--;
 					continue;
 				}
 				//数据验证
-				if(menu.get(i).getSysMenu_id().trim().length()==0){
+				if(menu.get(i).getRoleId().trim().length()==0){
 					menu.remove(i);
 					i--;
 					continue;
 				}
 				//查询角色信息，如果没有就移除
-				if(!sysMenuExits(sysMenuId.toString(),menu.get(i).getSysMenu_id().split(","))){
+				if(!sysMenuExits(sysMenuId.toString(),menu.get(i).getRoleId().split(","))){
 					menu.remove(i);
 					i--;
 					continue;
@@ -109,18 +109,6 @@ public class SysMenuService extends SysMenuDao {
 	}
 
 	
-	/**
-	 * 菜单查询计数器，用来计数等级节点
-	 * @param request
-	 * @return
-	 */
-	private int getDepthCount(HttpServletRequest request){
-		Object obj=request.getSession().getAttribute("depthCount");
-		String count=obj.toString();
-		return Integer.parseInt(count);
-	}
-	
-
 	@Override
 	public boolean add(SysMenu t) {
 		int result=sysMenuMapper.insert(t);
@@ -129,7 +117,7 @@ public class SysMenuService extends SysMenuDao {
 
 	@Override
 	public boolean delete(String idkey) throws SQLException {
-		if(StringUtils.isBlank(idkey))return false;
+		if(StringUtil.isBlank(idkey))return false;
 		int id=Integer.parseInt(idkey);
 		int result=sysMenuMapper.deleteByPrimaryKey(id);
 		return isSuccess(result);
@@ -149,7 +137,7 @@ public class SysMenuService extends SysMenuDao {
 
 	@Override
 	public SysMenu load(String id) {
-		if(StringUtils.isBlank(id))return null;
+		if(StringUtil.isBlank(id))return null;
 		int key=Integer.parseInt(id);
 		return sysMenuMapper.selectByPrimaryKey(key);
 	}
@@ -171,6 +159,15 @@ public class SysMenuService extends SysMenuDao {
 	@Override
 	public int maximum(SysMenuExample example) {
 		return sysMenuMapper.countByExample(example);
+	}
+	/**
+	 * 查询父级下的子菜单
+	 */
+	public List<SysMenu> findByParentId(String parentId){
+		Integer id=Integer.parseInt(parentId);
+		SysMenuExample example=new SysMenuExample();
+		example.or().andParentIdEqualTo(id);
+		return sysMenuMapper.selectByExample(example);
 	}
 	
 	private boolean isSuccess(int result) {
@@ -200,6 +197,16 @@ public class SysMenuService extends SysMenuDao {
 		}
 		
 		return example;
+	}
+	/**
+	 * 菜单查询计数器，用来计数等级节点
+	 * @param request
+	 * @return
+	 */
+	private int getDepthCount(HttpServletRequest request){
+		Object obj=request.getSession().getAttribute("depthCount");
+		String count=obj.toString();
+		return Integer.parseInt(count);
 	}
 	/**
 	 * 设置查询的父节点

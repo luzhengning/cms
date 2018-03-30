@@ -12,9 +12,9 @@ import com.geek.cms.modules.sys.entity.example.RoleExample;
 import com.geek.cms.modules.sys.entity.example.RoleExample.Criteria;
 import com.geek.cms.modules.sys.entity.example.RoleExample.Criterion;
 import com.geek.cms.modules.sys.mapper.RoleMapper;
-import com.geek.cms.plugin.grid.splitGridReq.GridRequest;
+import com.geek.cms.plugin.grid.gridReq.GridRequest;
 import com.geek.cms.utils.Converts;
-import com.geek.cms.utils.StringUtils;
+import com.geek.cms.utils.StringUtil;
 
 @Service
 public class RoleService extends RoleDao {
@@ -27,7 +27,9 @@ public class RoleService extends RoleDao {
 	@Override
 	public List<Role> findByIds(String[] ids) {
 		RoleExample example=new RoleExample();
-		example.or().andIdIn(Converts.ArrayToListInteger(ids));
+		if(!StringUtil.isBlank(ids)) {
+			example.or().andIdIn(Converts.ArrayToListInteger(ids));
+		}
 		List<Role> result=roleMapper.selectByExample(example);
 		return result;
 	}
@@ -40,7 +42,7 @@ public class RoleService extends RoleDao {
 
 	@Override
 	public boolean delete(String idkey) throws SQLException {
-		if(StringUtils.isBlank(idkey))return false;
+		if(StringUtil.isBlank(idkey))return false;
 		int id=Integer.parseInt(idkey);
 		int result=roleMapper.deleteByPrimaryKey(id);
 		return isSuccess(result);
@@ -60,7 +62,7 @@ public class RoleService extends RoleDao {
 
 	@Override
 	public Role load(String id) {
-		if(StringUtils.isBlank(id))return null;
+		if(StringUtil.isBlank(id))return null;
 		int key=Integer.parseInt(id);
 		return roleMapper.selectByPrimaryKey(key);
 	}

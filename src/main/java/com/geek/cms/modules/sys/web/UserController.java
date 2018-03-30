@@ -1,14 +1,18 @@
 package com.geek.cms.modules.sys.web;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
@@ -28,9 +32,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import com.geek.cms.modules.json.Json;
+import com.geek.cms.modules.json.JsonMessage;
+import com.geek.cms.modules.json.JsonUtil;
+import com.geek.cms.modules.sys.dao.RoleDao;
 import com.geek.cms.modules.sys.dao.UserDao;
+import com.geek.cms.modules.sys.entity.Permissions;
 import com.geek.cms.modules.sys.entity.User;
 import com.geek.cms.modules.sys.service.UserService;
+import com.geek.cms.plugin.grid.Page.SplitJsonModel;
+import com.geek.cms.plugin.grid.Page.SplitPage;
+import com.geek.cms.plugin.grid.gridReq.Grid;
+import com.geek.cms.plugin.grid.gridReq.GridRequest;
+import com.geek.cms.plugin.grid.gridReq.SplitGridRequestUtil;
+import com.geek.cms.utils.StringUtil;
+import com.geek.cms.utils.TimeUtil;
+import com.sdicons.json.mapper.MapperException;
 
 /**
  * 用户Controller
@@ -41,7 +58,9 @@ import com.geek.cms.modules.sys.service.UserService;
 public class UserController {
 
 	@Autowired
-	private UserDao userService;
+	private UserDao userDao;
+	@Autowired
+	RoleDao roleDao;
 
 	// 跳转到登录页面
 	@RequestMapping("/toLoginJsp")
@@ -115,12 +134,152 @@ public class UserController {
 		// return new ModelAndView("success");
 		return new ModelAndView("redirect:/admin/administrators", model);
 	}
-
+	/**
+	 * 权限表单
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws MapperException 
+	 */
+	@RequestMapping("/grid")
+	public ModelAndView grid(HttpServletRequest request,HttpServletResponse response) throws MapperException {
+		//String user=request.getParameter("user");
+		//创建表格对象
+		Grid grid=new Grid();
+		//页名
+		grid.setTitle("用户管理");
+		//路径 查询普通用户
+		grid.setLoadJsonUrl("/user/load");
+		//编辑路径
+		grid.setEditUrl("/user/form");
+		//删除路径
+		grid.setDeleteUrl("/user/delete");
+		//要显示的列
+		grid.setGridColumn(userDao.assemblySql);
+		//分页初始化
+		SplitPage page=new SplitPage();
+		page.setTotalRow(userDao.maximum(new GridRequest()));
+		page.setPageRow(10);
+		grid.setPage(page);
+		Map<String, Object> model=grid.getModel(grid);
+		
+		return new ModelAndView("/UiPlugin/grid",model);
+	}
+	@RequestMapping("/load")
+	public void loadJson(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		JsonMessage json=new JsonMessage();
+		PrintWriter out=null;
+		try {
+			response.setCharacterEncoding("UTF-8");
+			out=response.getWriter();
+			GridRequest model=SplitGridRequestUtil.getModel(request, userDao);
+			List<User> list=userDao.findList(model);
+			SplitJsonModel<User> jsonModel=new SplitJsonModel<User>(list, model.getSplitPage());
+			if(!StringUtil.isBlank(jsonModel)) {
+				json=Json.setSuccess(json);
+				json.setData(JsonUtil.objectToJsonStr(jsonModel));
+			}
+		}catch(Exception ex) {
+			json=Json.setException(json, ex);
+		}finally {
+			out.print(JsonUtil.objectToJsonStr(json));
+		}
+	}
+	@RequestMapping("/form")
+	public ModelAndView roleForm(HttpServletRequest request) throws MapperException{
+		Map<String, Object> model=new HashMap<String, Object>();
+		//分页
+		SplitPage page=new SplitPage();
+		page.setTotalRow(roleDao.maximum(new GridRequest()));
+		page.setPageRow(10);
+		model.put("page",page);
+		model.put("pageJsonData", JsonUtil.objectToJsonStr(page));
+		String id=request.getParameter("id");
+		if(id==null){
+			//添加权限
+			model.put("submitUrl", "/user/add");
+			model.put("user", new User(0));
+		}else{
+			//编辑权限
+			User user=userDao.load(id);
+			user.setRole(roleDao.findByIds(user.getRoleId().split(",")));
+			model.put("user", user);
+			model.put("submitUrl", "/user/edit");
+		}
+		return new ModelAndView("Admin/form/userForm",model);
+	}
+	@RequestMapping("/edit")
+	public void edit(User user,HttpServletRequest request,HttpServletResponse response) throws IOException{
+		JsonMessage json=new JsonMessage();
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			if(StringUtil.isBlank(user)) {
+				json.setMsg("参数异常！");
+				return;
+			}
+			if(userDao.update(user)){
+				json=Json.setSuccess(json);
+				json.setMsg("编辑成功！");
+			}else{
+				json=Json.setError(json);
+				json.setMsg("编辑失败！");
+			}
+		}catch(Exception ex) {
+			json=Json.setException(json, ex);
+		}finally {
+			out.print(JsonUtil.objectToJsonStr(json));
+		}
+	}
+	@RequestMapping("/add")
+	public void add(User user,HttpServletRequest request,HttpServletResponse response) throws IOException{
+		JsonMessage json=new JsonMessage();
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			if(StringUtil.isBlank(user)) {
+				json.setMsg("参数异常！");
+				return;
+			}
+			user.setRegistrationTime(TimeUtil.getTime());
+			if(userDao.add(user)){
+				json=Json.setSuccess(json);
+				json.setMsg("保存成功！");
+			}else{
+				json=Json.setError(json);
+				json.setMsg("保存失败！");
+			}
+		}catch(Exception ex) {
+			json=Json.setException(json, ex);
+		}finally {
+			out.print(JsonUtil.objectToJsonStr(json));
+		}
+	}
+	@RequestMapping("/delete")
+	public void delete(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		JsonMessage json=new JsonMessage();
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			String id=request.getParameter("id");
+			if(userDao.delete(id)){
+				json=Json.setSuccess(json);
+				json.setMsg("删除成功！");
+			}else{
+				json=Json.setError(json);
+				json.setMsg("删除失败！");
+			}
+		}catch(Exception ex) {
+			json=Json.setException(json, ex);
+		}finally {
+			out.print(JsonUtil.objectToJsonStr(json));
+		}
+	}
 	@RequestMapping("/get")
 	//属于user或者admin之一;修改logical为OR 即可
 	//@RequiresRoles(value={"user","13242"},logical=Logical.AND)
 	public void get() {
-		User user=userService.load("1");
+		User user=userDao.load("1");
 	}
 
 }

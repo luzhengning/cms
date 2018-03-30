@@ -44,7 +44,7 @@ public class LoggerUtils {
 	 */
 	public static void fmtDebug(Class<? extends Object> clazz,String fmtString,Object...value){
 		if(!isDebug)return ;
-		if(StringUtils.isBlank(fmtString)){
+		if(StringUtil.isBlank(fmtString)){
 			return ;
 		}
 		if(null != value && value.length != 0){
@@ -82,7 +82,7 @@ public class LoggerUtils {
 	 * @param value		输出信息value
 	 */
 	public static void fmtError(Class<? extends Object> clazz,Exception e,String fmtString,Object...value){
-		if(StringUtils.isBlank(fmtString)){
+		if(StringUtil.isBlank(fmtString)){
 			return ;
 		}
 		if(null != value && value.length != 0){
@@ -98,7 +98,7 @@ public class LoggerUtils {
 	 */
 	public static void fmtError(Class<? extends Object> clazz,
 			String fmtString, Object...value) {
-		if(StringUtils.isBlank(fmtString)){
+		if(StringUtil.isBlank(fmtString)){
 			return ;
 		}
 		if(null != value && value.length != 0){

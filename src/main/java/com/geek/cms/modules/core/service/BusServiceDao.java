@@ -1,11 +1,13 @@
 package com.geek.cms.modules.core.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.geek.cms.modules.core.mybatis.BaseMybatisDao;
 import com.geek.cms.modules.sys.entity.Permissions;
-import com.geek.cms.plugin.grid.splitGridReq.GridRequest;
+import com.geek.cms.plugin.grid.gridReq.GridColumn;
+import com.geek.cms.plugin.grid.gridReq.GridRequest;
 /**
  * 基本业务接口
  * @author luzhengning

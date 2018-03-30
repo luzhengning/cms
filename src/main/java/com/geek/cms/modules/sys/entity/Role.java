@@ -1,6 +1,7 @@
 package com.geek.cms.modules.sys.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Role {
     private Integer id;
@@ -11,19 +12,34 @@ public class Role {
 
     private String permissionId;
 
-    private Date createTime;
+    private String createTime;
 
-    private Date updateTime;
+    private String updateTime;
 
     private String lastUser;
 
     private String isEnable;
+    
+    private List<Permissions> permissions;
 
+    public Role(Integer id) {
+    	this.id=id;
+    }
+    public Role() {
+    }
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public List<Permissions> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(List<Permissions> permissions) {
+		this.permissions = permissions;
+	}
+
+	public void setId(Integer id) {
         this.id = id;
     }
 
@@ -51,19 +67,19 @@ public class Role {
         this.permissionId = permissionId == null ? null : permissionId.trim();
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 

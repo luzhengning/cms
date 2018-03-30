@@ -40,7 +40,7 @@ import com.geek.cms.modules.sys.entity.example.UserExample;
 import com.geek.cms.modules.sys.service.PermissionService;
 import com.geek.cms.modules.sys.service.RoleService;
 import com.geek.cms.modules.sys.service.UserService;
-import com.geek.cms.utils.StringUtils;
+import com.geek.cms.utils.StringUtil;
 
 
 /**
@@ -67,7 +67,7 @@ public class AuthorizationRealm extends AuthorizingRealm {
 		if(user==null)return null;
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 		//获取用户角色Id 
-		String[] roleIds=StringUtils.strToArray(user.getRoleId(),",");
+		String[] roleIds=StringUtil.strToArray(user.getRoleId(),",");
 		//查询用户角色
 		List<Role> roleList=roleService.findByIds(roleIds);
 		if (roleList != null) {
@@ -83,7 +83,7 @@ public class AuthorizationRealm extends AuthorizingRealm {
             List<Permissions> permissionList=new ArrayList<Permissions>();
             String[] permissionIds=null;
             for(int i=0;i<roleList.size();i++) {
-            	permissionIds=StringUtils.strToArray(roleList.get(i).getPermissionId(), ",");
+            	permissionIds=StringUtil.strToArray(roleList.get(i).getPermissionId(), ",");
             	//查询权限
             	List<Permissions> plist=permissionService.findByIds(permissionIds);
             	if(plist==null)continue;

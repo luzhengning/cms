@@ -11,9 +11,9 @@ public class Permissions {
 
     private String permissionMark;
 
-    private Date createTime;
+    private String createTime;
 
-    private Date updateTime;
+    private String updateTime;
 
     private String lastUser;
 
@@ -21,6 +21,10 @@ public class Permissions {
 
     public Integer getId() {
         return id;
+    }
+    public Permissions(){}
+    public Permissions(Integer id){
+    	this.id=id;
     }
 
     public void setId(Integer id) {
@@ -51,19 +55,19 @@ public class Permissions {
         this.permissionMark = permissionMark == null ? null : permissionMark.trim();
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 

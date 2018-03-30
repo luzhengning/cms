@@ -2,7 +2,7 @@ package com.geek.cms.utils;
 
 import java.util.List;
 
-public class StringUtils {
+public class StringUtil {
 	
 	/**
 	 * 通过指定字符连接String数组
@@ -76,6 +76,7 @@ public class StringUtils {
 	 * @return 只要有一个元素为Blank，则返回true
 	 */
 	public static boolean isBlank(Object...objects){
+		if(objects==null)return true;
 		Boolean result = false ;
 		for (Object object : objects) {
 			if(null == object || "".equals(object.toString().trim()) 
@@ -89,4 +90,8 @@ public class StringUtils {
 	public static String trim(String str) {
         return str == null ? null : str.trim();
     }
+	public static boolean isNumeric(String depthNum) {
+		// TODO 自动生成的方法存根
+		return false;
+	}
 }

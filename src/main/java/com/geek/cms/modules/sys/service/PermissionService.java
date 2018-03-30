@@ -13,9 +13,9 @@ import com.geek.cms.modules.sys.entity.example.PermissionsExample;
 import com.geek.cms.modules.sys.entity.example.PermissionsExample.Criteria;
 import com.geek.cms.modules.sys.entity.example.PermissionsExample.Criterion;
 import com.geek.cms.modules.sys.mapper.PermissionsMapper;
-import com.geek.cms.plugin.grid.splitGridReq.GridRequest;
+import com.geek.cms.plugin.grid.gridReq.GridRequest;
 import com.geek.cms.utils.Converts;
-import com.geek.cms.utils.StringUtils;
+import com.geek.cms.utils.StringUtil;
 
 /**
  * 权限操作service
@@ -33,6 +33,7 @@ public class PermissionService extends PermissionsDao {
 	@Override
 	public List<Permissions> findByIds(String[] ids) {
 		if(ids==null)return null;
+		if(ids.length==0)return null;
 		PermissionsExample example=new PermissionsExample();
 		example.or().andIdIn(Converts.ArrayToListInteger(ids));
 		List<Permissions> result=permissionsMapper.selectByExample(example);
@@ -46,7 +47,7 @@ public class PermissionService extends PermissionsDao {
 
 	@Override
 	public boolean delete(String idkey) throws SQLException {
-		if(StringUtils.isBlank(idkey))return false;
+		if(StringUtil.isBlank(idkey))return false;
 		int id=Integer.parseInt(idkey);
 		int result=permissionsMapper.deleteByPrimaryKey(id);
 		return isSuccess(result);
@@ -66,7 +67,7 @@ public class PermissionService extends PermissionsDao {
 
 	@Override
 	public Permissions load(String id) {
-		if(StringUtils.isBlank(id))return null;
+		if(StringUtil.isBlank(id))return null;
 		int key=Integer.parseInt(id);
 		return permissionsMapper.selectByPrimaryKey(key);
 	}

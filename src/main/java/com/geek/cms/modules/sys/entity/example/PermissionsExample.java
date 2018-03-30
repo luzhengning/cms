@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.geek.cms.plugin.grid.splitPage.SplitPage;
+import com.geek.cms.plugin.grid.Page.SplitPage;
 
 public class PermissionsExample {
     protected String orderByClause;

@@ -1,9 +1,9 @@
-package com.geek.cms.plugin.grid.splitGridReq;
+package com.geek.cms.plugin.grid.gridReq;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.geek.cms.modules.core.service.BusServiceDao;
-import com.geek.cms.plugin.grid.splitPage.SplitPage;
+import com.geek.cms.plugin.grid.Page.SplitPage;
 
 
 
@@ -69,7 +69,6 @@ public class SplitGridRequestUtil {
 		model.setParamsNameSql(MapToQuerySql(model));
 		//分页
 		model.setSplitPage(SplitGridRequestUtil.getSplitPage(model, dao, request));
-		
 		model.setLimit("");
 		if(model.getSplitPage()!=null)model.setLimit(model.getSplitPage().limit);
 		model.setParamsNameSql(model.getParamsNameSql()+model.getLimit());

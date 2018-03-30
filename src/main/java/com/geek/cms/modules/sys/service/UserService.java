@@ -12,8 +12,8 @@ import com.geek.cms.modules.sys.entity.example.UserExample;
 import com.geek.cms.modules.sys.entity.example.UserExample.Criteria;
 import com.geek.cms.modules.sys.entity.example.UserExample.Criterion;
 import com.geek.cms.modules.sys.mapper.UserMapper;
-import com.geek.cms.plugin.grid.splitGridReq.GridRequest;
-import com.geek.cms.utils.StringUtils;
+import com.geek.cms.plugin.grid.gridReq.GridRequest;
+import com.geek.cms.utils.StringUtil;
 
 @Service
 public class UserService extends UserDao {
@@ -42,7 +42,7 @@ public class UserService extends UserDao {
 
 	@Override
 	public boolean delete(String idkey) throws SQLException {
-		if(StringUtils.isBlank(idkey))return false;
+		if(StringUtil.isBlank(idkey))return false;
 		int id=Integer.parseInt(idkey);
 		UserExample example=new UserExample();
 		example.or().andIdEqualTo(id);
@@ -66,7 +66,7 @@ public class UserService extends UserDao {
 
 	@Override
 	public User load(String id) {
-		if(StringUtils.isBlank(id))return null;
+		if(StringUtil.isBlank(id))return null;
 		int key=Integer.parseInt(id);
 		User list=userMapper.selectByPrimaryKey(key);
 		if(list!=null)

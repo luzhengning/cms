@@ -19,7 +19,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.geek.cms.modules.core.mybatis.page.MysqlDialect;
 import com.geek.cms.modules.core.mybatis.page.Pagination;
 import com.geek.cms.utils.LoggerUtils;
-import com.geek.cms.utils.StringUtils;
+import com.geek.cms.utils.StringUtil;
 
 
 @SuppressWarnings( { "unchecked" })
@@ -79,7 +79,7 @@ public class BaseMybatisDao<T> extends SqlSessionDaoSupport {
 		/**
 		 * sql id 和 count id 用同一个
 		 */
-		if (StringUtils.isBlank(sqlId)) {
+		if (StringUtil.isBlank(sqlId)) {
 			countCode = sqlcode;
 			countSql = boundSql;
 		} else {
@@ -180,7 +180,7 @@ public class BaseMybatisDao<T> extends SqlSessionDaoSupport {
 		LoggerUtils.fmtDebug(SELF, "findPage sql : %s",sqlcode );
 		String countCode = "";
 		BoundSql countSql = null;
-		if (StringUtils.isBlank(countId)) {
+		if (StringUtil.isBlank(countId)) {
 			countCode = sqlcode;
 			countSql = boundSql;
 		} else {
@@ -262,7 +262,7 @@ public class BaseMybatisDao<T> extends SqlSessionDaoSupport {
 	private PreparedStatement getPreparedStatement4Count(String sql,
 			List<ParameterMapping> parameterMappingList,
 			Map<String, Object> params, Connection conn) throws SQLException {
-		PreparedStatement ps = conn.prepareStatement(StringUtils.trim(sql));
+		PreparedStatement ps = conn.prepareStatement(StringUtil.trim(sql));
 		int index = 1;
 		for (int i = 0; i < parameterMappingList.size(); i++) {
 			ps.setObject(index++, params.get(parameterMappingList.get(i)

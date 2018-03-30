@@ -1,13 +1,15 @@
 package com.geek.cms.modules.sys.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.geek.cms.modules.core.mybatis.BaseMybatisDao;
 import com.geek.cms.modules.core.service.BusServiceDao;
 import com.geek.cms.modules.sys.entity.Permissions;
 import com.geek.cms.modules.sys.entity.example.PermissionsExample;
-import com.geek.cms.plugin.grid.splitGridReq.GridRequest;
+import com.geek.cms.plugin.grid.gridReq.GridColumn;
+import com.geek.cms.plugin.grid.gridReq.GridRequest;
 
 /**
  * 权限接口抽象类，该类被Service类继承
@@ -15,21 +17,18 @@ import com.geek.cms.plugin.grid.splitGridReq.GridRequest;
  * 2017年11月1日 下午3:09:27
  */
 public abstract class PermissionsDao  implements BusServiceDao<Permissions,PermissionsExample> {
-
-	/*public PermissionsDao(Class clz) {
-		super(clz);
-		super.assemblySql.tableName="sys_permissions";
-		super.assemblySql.columnNames.add(new GridColumn("名称","permission_name"));
-		super.assemblySql.columnNames.add(new GridColumn("编号","permission_code"));
-		super.assemblySql.columnNames.add(new GridColumn("备注","permission_mark"));
-		super.assemblySql.columnNames.add(new GridColumn("创建时间","create_time"));
-		super.assemblySql.columnNames.add(new GridColumn("修改时间","update_time"));
-		super.assemblySql.columnNames.add(new GridColumn("最后修改人","last_user"));
-		super.assemblySql.columnNames.add(new GridColumn("是否禁用","is_enable"));
-		//生成sql
-		setSql();
+	public List<GridColumn> assemblySql=new ArrayList<GridColumn>();
+	public PermissionsDao() {
+		assemblySql.add(new GridColumn("ID","id","id"));
+		assemblySql.add(new GridColumn("名称","permission_name","permissionName"));
+		assemblySql.add(new GridColumn("编号","permission_code","permissionCode"));
+		assemblySql.add(new GridColumn("备注","permission_mark","permissionMark"));
+		assemblySql.add(new GridColumn("创建时间","create_time","createTime"));
+		assemblySql.add(new GridColumn("修改时间","update_time","updateTime"));
+		assemblySql.add(new GridColumn("最后修改人","last_user","lastUser"));
+		assemblySql.add(new GridColumn("是否禁用","is_enable","isEnable"));
 	}
-	@Override
+	/*@Override
 	public Object[] entityToObjects(Permissions t) {
 		Object[] params=new Object[]{
 				t.getPermissionName(),

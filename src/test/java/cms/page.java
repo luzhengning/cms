@@ -1,7 +1,7 @@
 package cms;
 
-import com.geek.cms.plugin.grid.splitGridReq.GridRequest;
-import com.geek.cms.plugin.grid.splitPage.SplitPage;
+import com.geek.cms.plugin.grid.Page.SplitPage;
+import com.geek.cms.plugin.grid.gridReq.GridRequest;
 
 public class page {
 

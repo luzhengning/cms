@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.geek.cms.modules.sys.dao.PermissionsDao;
 import com.geek.cms.modules.sys.dao.SysMenuDao;
@@ -20,8 +21,8 @@ import com.geek.cms.modules.sys.mapper.PermissionsMapper;
 import com.geek.cms.modules.sys.mapper.RoleMapper;
 import com.geek.cms.modules.sys.mapper.SysMenuMapper;
 import com.geek.cms.modules.sys.mapper.UserMapper;
-import com.geek.cms.plugin.grid.splitGridReq.GridRequest;
-import com.geek.cms.plugin.grid.splitPage.SplitPage;
+import com.geek.cms.plugin.grid.Page.SplitPage;
+import com.geek.cms.plugin.grid.gridReq.GridRequest;
 
 /**
  * 测试
@@ -54,5 +55,9 @@ public class test {
 		
 		example.page.toNewPage("3");
 		List<SysMenu> menu2=dao.findList(example);
+	}
+	@RequestMapping("/test")
+	public ModelAndView test() {
+		return new ModelAndView("/Shop/test");
 	}
 }

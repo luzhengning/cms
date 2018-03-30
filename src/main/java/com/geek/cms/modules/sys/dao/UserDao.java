@@ -2,13 +2,16 @@
 
 package com.geek.cms.modules.sys.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.geek.cms.modules.core.service.BusService;
 import com.geek.cms.modules.core.service.BusServiceDao;
 import com.geek.cms.modules.sys.entity.Role;
 import com.geek.cms.modules.sys.entity.User;
 import com.geek.cms.modules.sys.entity.example.RoleExample;
 import com.geek.cms.modules.sys.entity.example.UserExample;
-import com.geek.cms.plugin.grid.splitGridReq.GridColumn;
+import com.geek.cms.plugin.grid.gridReq.GridColumn;
 import com.geek.cms.utils.db.DbUtil;
 
 /**
@@ -17,32 +20,29 @@ import com.geek.cms.utils.db.DbUtil;
  * 2017年11月1日 下午4:05:21
  */
 public abstract class UserDao implements BusServiceDao<User,UserExample> {
-
-	/*public UserDao(Class clz) {
-		super(clz);
-		super.assemblySql.tableName="sys_user";
-		super.assemblySql.columnNames.add(new GridColumn("角色id","role_id"));
-		super.assemblySql.columnNames.add(new GridColumn("昵称","nickname"));
-		super.assemblySql.columnNames.add(new GridColumn("姓名","NAME"));
-		super.assemblySql.columnNames.add(new GridColumn("账号","account"));
-		super.assemblySql.columnNames.add(new GridColumn("密码","password"));
-		super.assemblySql.columnNames.add(new GridColumn("性别","sex"));
-		super.assemblySql.columnNames.add(new GridColumn("年龄","age"));
-		super.assemblySql.columnNames.add(new GridColumn("生日","birthday"));
-		super.assemblySql.columnNames.add(new GridColumn("手机号码","phone"));
-		super.assemblySql.columnNames.add(new GridColumn("邮箱","email"));
-		super.assemblySql.columnNames.add(new GridColumn("地址","address"));
-		super.assemblySql.columnNames.add(new GridColumn("安全等级","security_level"));
-		super.assemblySql.columnNames.add(new GridColumn("账号等级","account_level"));
-		super.assemblySql.columnNames.add(new GridColumn("排序","sort"));
-		super.assemblySql.columnNames.add(new GridColumn("注册时间","registration_time"));
-		super.assemblySql.columnNames.add(new GridColumn("备注","mark"));
-		super.assemblySql.columnNames.add(new GridColumn("用户类型","user_type"));
-		super.assemblySql.columnNames.add(new GridColumn("是否禁用","is_enable"));
-		//生成sql
-		setSql();
+	public List<GridColumn> assemblySql=new ArrayList<GridColumn>();
+	public UserDao() {
+		assemblySql.add(new GridColumn("ID","id","id"));
+		/*assemblySql.add(new GridColumn("角色id","role_id","roleId"));*/
+		assemblySql.add(new GridColumn("昵称","nickname","nickname"));
+		assemblySql.add(new GridColumn("姓名","name","name"));
+		assemblySql.add(new GridColumn("账号","account","account"));
+		/*assemblySql.add(new GridColumn("密码","password","password"));*/
+		assemblySql.add(new GridColumn("性别","sex","sex"));
+		assemblySql.add(new GridColumn("年龄","age","age"));
+		/*assemblySql.add(new GridColumn("生日","birthday","birthday"));*/
+		assemblySql.add(new GridColumn("手机号码","phone","phone"));
+		/*assemblySql.add(new GridColumn("邮箱","email","email"));*/
+		assemblySql.add(new GridColumn("地址","address","address"));
+		/*assemblySql.add(new GridColumn("安全等级","security_level","securityLevel"));
+		assemblySql.add(new GridColumn("账号等级","account_level","accountLevel"));*/
+		/*assemblySql.add(new GridColumn("排序","sort","sort"));*/
+		assemblySql.add(new GridColumn("注册时间","registration_time","registrationTime"));
+		/*assemblySql.add(new GridColumn("备注","mark","mark"));*/
+		assemblySql.add(new GridColumn("用户类型","user_type","userType"));
+		assemblySql.add(new GridColumn("是否禁用","is_enable","isEnable"));
 	}
-	@Override
+	/*@Override
 	public Object[] entityToObjects(User user) {
 		Object[] params=new Object[]{
 				user.getRoleId(),

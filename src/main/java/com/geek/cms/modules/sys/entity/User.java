@@ -1,6 +1,7 @@
 package com.geek.cms.modules.sys.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class User {
     private Integer id;
@@ -19,7 +20,7 @@ public class User {
 
     private Integer age;
 
-    private Date birthday;
+    private String birthday;
 
     private String phone;
 
@@ -33,19 +34,35 @@ public class User {
 
     private Integer sort;
 
-    private Date registrationTime;
+    private String registrationTime;
 
     private String mark;
 
     private String userType;
 
     private String isEnable;
+    
+    private List<Role> role;
+    
+    public User() {}
+    public User(Integer id) {
+    	this.id=id;
+    }
 
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    
+    public List<Role> getRole() {
+		return role;
+	}
+
+	public void setRole(List<Role> role) {
+		this.role = role;
+	}
+
+	public void setId(Integer id) {
         this.id = id;
     }
 
@@ -105,11 +122,11 @@ public class User {
         this.age = age;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -161,11 +178,11 @@ public class User {
         this.sort = sort;
     }
 
-    public Date getRegistrationTime() {
+    public String getRegistrationTime() {
         return registrationTime;
     }
 
-    public void setRegistrationTime(Date registrationTime) {
+    public void setRegistrationTime(String registrationTime) {
         this.registrationTime = registrationTime;
     }
 

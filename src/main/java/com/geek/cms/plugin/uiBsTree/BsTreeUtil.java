@@ -39,12 +39,12 @@ public class BsTreeUtil {
 	 * @return
 	 */
 	private String SysMenuToJsonTextParent(SysMenu sysMenu){
-		String text="<span>"+sysMenu.getName()+"</span><span>&nbsp;&nbsp;&nbsp;&nbsp;"+sysMenu.getUrl()+" "+("select".equals(sysMenu.getIndexSelect())?"[首页]":"")+"</span>"
+		String text="<span>"+sysMenu.getName()+" [ID:"+sysMenu.getId()+"]"+"</span><span>&nbsp;&nbsp;&nbsp;&nbsp;"+sysMenu.getUrl()+" "+("select".equals(sysMenu.getIndexSelect())?"[首页]":"")+"</span>"
 		+ "<span  style=\"float:right;text-decoration:none;\">"
-		 +"<a id=\"modal-385581\" href=\"#modal-container-385581\" data-toggle=\"modal\" style=\"text-decoration:none;\" value=\""+sysMenu.getName()+","+sysMenu.getUrl()+","+arrayToString(sysMenu.getRoleId(),"@")+","+sysMenu.getSortNum()+","+sysMenu.getId()+","+sysMenu.getParentId()+","+sysMenu.getCreateTime()+","+sysMenu.getIndexSelect()+"\" onclick=\"editBtn(this)\">"
+		 +"<a id=\"modal-385581\" href=\"#modal-container-385581\" data-toggle=\"modal\" style=\"text-decoration:none;\" value=\""+sysMenu.getName()+","+sysMenu.getUrl()+","+arrayToString(sysMenu.getRoleId(),"@")+","+sysMenu.getSortNum()+","+sysMenu.getId()+","+sysMenu.getParentId()+","+sysMenu.getCreateTime()+","+sysMenu.getIsEnable()+"\" onclick=\"editBtn(this)\">"
 		 		+"<span class=\"label label-success\" value=\"110\">编辑</span>"
 		 +"</a>&nbsp;&nbsp;"
-		  +"<a href=\"#modal-container-385583\" data-toggle=\"modal\" style=\"text-decoration:none;\" value=\""+sysMenu.getId()+"\" onclick=\"addBtn("+sysMenu.getId()+")\">"
+		  +"<a id=\"modal-385581\" href=\"#modal-container-385581\" data-toggle=\"modal\" style=\"text-decoration:none;\" value=\""+sysMenu.getId()+"\" onclick=\"editBtn(this)\">"
 		 		+"<span class=\"label label-info\" >添加子节点</span>"
 		 +"</a>&nbsp;&nbsp;"
 		 +"<a href=\"#modal-container-385582\" data-toggle=\"modal\" style=\"text-decoration:none;\">"

@@ -1,6 +1,6 @@
-package com.geek.cms.plugin.grid.splitGridReq;
+package com.geek.cms.plugin.grid.gridReq;
 
-import com.geek.cms.plugin.grid.splitPage.SplitPage;
+import com.geek.cms.plugin.grid.Page.SplitPage;
 
 /**
  * 表格请求到服务端的数据
@@ -86,6 +86,7 @@ public class GridRequest {
 	 * @return
 	 */
 	public SplitPage getSplitPage() {
+		//if(splitPage==null) return new SplitPage();
 		return splitPage;
 	}
 	/**

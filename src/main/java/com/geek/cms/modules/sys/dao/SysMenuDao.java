@@ -11,7 +11,7 @@ import com.geek.cms.modules.sys.entity.SysMenu;
 import com.geek.cms.modules.sys.entity.User;
 import com.geek.cms.modules.sys.entity.example.RoleExample;
 import com.geek.cms.modules.sys.entity.example.SysMenuExample;
-import com.geek.cms.plugin.grid.splitGridReq.GridColumn;
+import com.geek.cms.plugin.grid.gridReq.GridColumn;
 import com.geek.cms.utils.db.DbUtil;
 
 /**
@@ -50,7 +50,7 @@ public abstract class SysMenuDao  implements BusServiceDao<SysMenu,SysMenuExampl
 	}*/
 	public abstract List<SysMenu> findListByRoleId(Object sysMenuId,String parentId,int depthNum,HttpServletRequest request);
 	public abstract void setParentId(String ParentId,HttpServletRequest request);
-	
+	public abstract List<SysMenu> findByParentId(String parentId);
 
 	/*super.querySql="SELECT * FROM sys_tree_menu ";
 	super.deleteSql="DELETE FROM sys_tree_menu ";

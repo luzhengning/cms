@@ -6,8 +6,8 @@
     <result column="permission_name" property="permissionName" jdbcType="VARCHAR" />
     <result column="permission_code" property="permissionCode" jdbcType="VARCHAR" />
     <result column="permission_mark" property="permissionMark" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
     <result column="last_user" property="lastUser" jdbcType="VARCHAR" />
     <result column="is_enable" property="isEnable" jdbcType="VARCHAR" />
   </resultMap>
@@ -88,7 +88,7 @@
       order by ${orderByClause}
     </if>
     <if test="page != null">
-    	LIMIT ${page.currentNum},${page.pageRow}
+    	LIMIT ${page.statrNum},${page.pageRow}
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -96,9 +96,6 @@
     <include refid="Base_Column_List" />
     from sys_permissions
     where id = #{id,jdbcType=INTEGER}
-    <if test="page != null">
-    	LIMIT ${page.currentNum},${page.pageRow}
-    </if>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from sys_permissions
@@ -115,7 +112,7 @@
       permission_mark, create_time, update_time, 
       last_user, is_enable)
     values (#{id,jdbcType=INTEGER}, #{permissionName,jdbcType=VARCHAR}, #{permissionCode,jdbcType=VARCHAR}, 
-      #{permissionMark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{permissionMark,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, 
       #{lastUser,jdbcType=VARCHAR}, #{isEnable,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.geek.cms.modules.sys.entity.Permissions" >
@@ -160,10 +157,10 @@
         #{permissionMark,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=VARCHAR},
       </if>
       <if test="lastUser != null" >
         #{lastUser,jdbcType=VARCHAR},
@@ -195,10 +192,10 @@
         permission_mark = #{record.permissionMark,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null" >
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        create_time = #{record.createTime,jdbcType=VARCHAR},
       </if>
       <if test="record.updateTime != null" >
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=VARCHAR},
       </if>
       <if test="record.lastUser != null" >
         last_user = #{record.lastUser,jdbcType=VARCHAR},
@@ -217,8 +214,8 @@
       permission_name = #{record.permissionName,jdbcType=VARCHAR},
       permission_code = #{record.permissionCode,jdbcType=VARCHAR},
       permission_mark = #{record.permissionMark,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=VARCHAR},
       last_user = #{record.lastUser,jdbcType=VARCHAR},
       is_enable = #{record.isEnable,jdbcType=VARCHAR}
     <if test="_parameter != null" >
@@ -238,10 +235,10 @@
         permission_mark = #{permissionMark,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+        create_time = #{createTime,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=VARCHAR},
       </if>
       <if test="lastUser != null" >
         last_user = #{lastUser,jdbcType=VARCHAR},
@@ -257,8 +254,8 @@
     set permission_name = #{permissionName,jdbcType=VARCHAR},
       permission_code = #{permissionCode,jdbcType=VARCHAR},
       permission_mark = #{permissionMark,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
       last_user = #{lastUser,jdbcType=VARCHAR},
       is_enable = #{isEnable,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
